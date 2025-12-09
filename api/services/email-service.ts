@@ -35,11 +35,32 @@ export class EmailService {
     }
 
     try {
+      // Generate unsubscribe URL
+      const siteUrl = process.env.SITE_URL || process.env.VERCEL_URL 
+        ? `https://${process.env.VERCEL_URL}` 
+        : 'https://your-domain.vercel.app';
+      const unsubscribeToken = Buffer.from(`${data.to}:${Date.now()}`).toString('base64');
+      const unsubscribeUrl = `${siteUrl}/api/unsubscribe?email=${encodeURIComponent(data.to)}&token=${unsubscribeToken}`;
+      
+      // Replace placeholders in HTML
+      let htmlWithUnsubscribe = data.html.replace(
+        /\{\{unsubscribe_url\}\}/g,
+        unsubscribeUrl
+      );
+      htmlWithUnsubscribe = htmlWithUnsubscribe.replace(
+        /\{\{site_url\}\}/g,
+        siteUrl
+      );
+
       const result = await resend.emails.send({
         from: `${this.fromName} <${this.fromEmail}>`,
         to: data.to,
         subject: data.subject,
-        html: data.html,
+        html: htmlWithUnsubscribe,
+        headers: {
+          'List-Unsubscribe': `<${unsubscribeUrl}>`,
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
+        },
         attachments: data.attachments?.map(att => ({
           filename: att.filename,
           content: att.content instanceof Buffer 

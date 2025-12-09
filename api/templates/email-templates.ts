@@ -305,6 +305,14 @@ export function getChecklistEmail(firstname: string): EmailTemplate {
         <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
           P.S. This checklist is part of my DevOps Productivity Suite—5 production-ready tools that automate your workflow. If you're interested, let's chat!
         </p>
+        
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 40px 0 20px;">
+        
+        <p style="font-size: 0.85em; color: #718096; text-align: center;">
+          You received this email because you requested the DevOps Automation Checklist.<br>
+          <a href="{{unsubscribe_url}}" style="color: #718096; text-decoration: underline;">Unsubscribe</a> | 
+          <a href="{{site_url}}" style="color: #718096; text-decoration: underline;">Update Preferences</a>
+        </p>
       </body>
       </html>
     `
