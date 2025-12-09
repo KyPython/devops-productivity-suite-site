@@ -98,6 +98,14 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
     }
   ];
 
+  // Helper function to escape HTML for use in srcdoc attribute (double-quoted)
+  // Only escape quotes and ampersands that would break the attribute
+  const escapeHtmlForSrcdoc = (str: string): string => {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/"/g, '&quot;');
+  };
+
   // If HTML format requested, return a preview page
   if (req.query.format === 'html') {
     const html = `
@@ -353,7 +361,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
           </div>
           <div class="email-preview">
             <iframe 
-              srcdoc='${email.html.replace(/'/g, "&#39;")}' 
+              srcdoc="${escapeHtmlForSrcdoc(email.html)}" 
               style="height: 600px; width: 100%; border: none;"
               onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px'"
             ></iframe>
@@ -362,7 +370,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
             <a href="mailto:?subject=${encodeURIComponent(email.subject)}&body=${encodeURIComponent(email.html.replace(/<[^>]*>/g, ''))}" class="btn btn-primary">
               Open in Email Client
             </a>
-            <button onclick="copyToClipboard('${email.html.replace(/'/g, "\\'")}')" class="btn btn-secondary">
+            <button onclick="copyToClipboard(${JSON.stringify(email.html)})" class="btn btn-secondary">
               Copy HTML
             </button>
           </div>
