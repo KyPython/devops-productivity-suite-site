@@ -26,7 +26,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
         if (!client) {
           throw new AppError(ErrorCode.NOT_FOUND, 'Client not found', 404);
         }
-        return res.status(200).json({ success: true, data: client });
+        res.status(200).json({ success: true, data: client });
       }
 
       if (email && typeof email === 'string') {
@@ -34,12 +34,12 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
         if (!client) {
           throw new AppError(ErrorCode.NOT_FOUND, 'Client not found', 404);
         }
-        return res.status(200).json({ success: true, data: client });
+        res.status(200).json({ success: true, data: client });
       }
 
       if (status && typeof status === 'string') {
         const clients = await clientStorage.getClientsByStatus(status as any);
-        return res.status(200).json({ success: true, data: clients });
+        res.status(200).json({ success: true, data: clients });
       }
 
       const clients = await clientStorage.getAllClients();
@@ -90,7 +90,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
       });
 
       logger.info('Client created via API', { clientId: client.id, company: client.company });
-      return res.status(201).json({ success: true, data: client });
+      res.status(201).json({ success: true, data: client });
     }
 
     // PUT - Update client
@@ -132,7 +132,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
       }
 
       logger.info('Client updated via API', { clientId });
-      return res.status(200).json({ success: true, data: updated });
+      res.status(200).json({ success: true, data: updated });
     }
 
     // DELETE - Delete client
@@ -148,7 +148,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
       }
 
       logger.info('Client deleted via API', { clientId });
-      return res.status(200).json({ success: true, message: 'Client deleted' });
+      res.status(200).json({ success: true, message: 'Client deleted' });
     }
 
     throw new AppError(ErrorCode.NOT_FOUND, 'Method not allowed', 405);

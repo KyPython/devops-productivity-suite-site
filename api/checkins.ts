@@ -20,7 +20,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
     if (req.method === 'GET') {
       if (req.url?.includes('/due')) {
         const dueClients = await workflowAutomation.checkForDueCheckins();
-        return res.status(200).json({
+        res.status(200).json({
           success: true,
           data: dueClients.map(c => ({
             id: c.id,

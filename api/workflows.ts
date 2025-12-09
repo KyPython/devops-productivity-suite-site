@@ -52,7 +52,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
 
       logger.info('Check-in workflow executed', { total: dueClients.length, successful, failed });
 
-      return res.status(200).json({
+      res.status(200).json({
         success: true,
         message: `Processed ${successful} check-ins, ${failed} failed`,
         processed: successful,
@@ -81,7 +81,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
 
       logger.info('Onboarding reminder workflow executed', { total: reminders.length, successful, failed });
 
-      return res.status(200).json({
+      res.status(200).json({
         success: true,
         message: `Sent ${successful} reminders, ${failed} failed`,
         processed: successful,

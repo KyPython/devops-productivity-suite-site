@@ -24,7 +24,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
 
       if (req.url?.includes('/reminders')) {
         const reminders = await workflowAutomation.checkForOnboardingReminders();
-        return res.status(200).json({
+        res.status(200).json({
           success: true,
           data: reminders,
         });
@@ -37,7 +37,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
         }
 
         const checklist = documentGenerator.generateOnboardingChecklist(client);
-        return res.status(200).json({
+        res.status(200).json({
           success: true,
           data: checklist,
           client: {
@@ -69,7 +69,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
 
         await workflowAutomation.updateOnboardingProgress(clientId, taskKey, completed);
 
-        return res.status(200).json({
+        res.status(200).json({
           success: true,
           message: 'Onboarding progress updated',
         });
@@ -94,7 +94,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
           true
         );
 
-        return res.status(200).json({
+        res.status(200).json({
           success: true,
           message: 'Onboarding reminder sent',
         });

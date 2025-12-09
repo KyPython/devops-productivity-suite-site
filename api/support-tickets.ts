@@ -51,7 +51,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
 
     logger.info('Support ticket created', { clientId });
 
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
       message: 'Support ticket created',
       data: ticketContent,
