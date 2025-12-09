@@ -89,22 +89,38 @@ export class EmailQueueService {
   private async scheduleChecklistEmail(email: string, firstname: string): Promise<void> {
     const template = getChecklistEmail(firstname);
     
-    // Try to load PDF - in Vercel, files are in the deployment
+    // Try to load PDF - check multiple possible locations
     let attachments;
-    try {
-      const pdfPath = path.join(process.cwd(), 'BUSINESS_MATERIALS', 'MARKETING', 'DevOps_Automation_Checklist.pdf');
-      if (fs.existsSync(pdfPath)) {
-        const pdfBuffer = fs.readFileSync(pdfPath);
-        attachments = [{
-          filename: 'DevOps_Automation_Checklist.pdf',
-          content: pdfBuffer,
-          type: 'application/pdf'
-        }];
-      } else {
-        logger.warn('PDF not found at expected path, sending email without attachment', { pdfPath });
+    const possiblePaths = [
+      path.join(process.cwd(), 'public', 'DevOps_Automation_Checklist.pdf'), // Vercel deployment
+      path.join(process.cwd(), 'BUSINESS_MATERIALS', 'MARKETING', 'DevOps_Automation_Checklist.pdf'), // Local dev
+      path.join(__dirname, '../../public/DevOps_Automation_Checklist.pdf'), // Alternative path
+    ];
+    
+    let pdfBuffer: Buffer | null = null;
+    for (const pdfPath of possiblePaths) {
+      try {
+        if (fs.existsSync(pdfPath)) {
+          pdfBuffer = fs.readFileSync(pdfPath);
+          logger.info('PDF found and loaded', { pdfPath });
+          break;
+        }
+      } catch (error) {
+        logger.warn('Failed to load PDF from path', { pdfPath, error });
       }
-    } catch (error) {
-      logger.warn('Failed to load PDF, sending email without attachment', { error });
+    }
+    
+    if (pdfBuffer) {
+      attachments = [{
+        filename: 'DevOps_Automation_Checklist.pdf',
+        content: pdfBuffer,
+        type: 'application/pdf'
+      }];
+      logger.info('PDF attachment prepared', { size: pdfBuffer.length });
+    } else {
+      logger.warn('PDF not found in any expected location, sending email without attachment', { 
+        checkedPaths: possiblePaths 
+      });
     }
 
     await emailService.sendEmail({
