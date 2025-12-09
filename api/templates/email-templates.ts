@@ -10,7 +10,7 @@ export interface EmailTemplate {
 
 export function getWelcomeEmail(firstname: string): EmailTemplate {
   return {
-    subject: "Welcome! Here's how we help dev teams save 5+ hours/week",
+    subject: "Welcome! Here's how I help dev teams save 5+ hours/week",
     html: `
       <!DOCTYPE html>
       <html>
@@ -23,7 +23,7 @@ export function getWelcomeEmail(firstname: string): EmailTemplate {
         
         <p>Thanks for your interest in the DevOps Productivity Suite!</p>
         
-        <p>I help development teams eliminate repetitive tasks and standardize their DevOps workflows. Our suite combines 5 production-ready tools that:</p>
+        <p>I help development teams eliminate repetitive tasks and standardize their DevOps workflows. My suite combines 5 production-ready tools that:</p>
         
         <ul>
           <li>✅ Automate CI/CD pipelines</li>
@@ -72,7 +72,7 @@ export function getPainPointEmail(firstname: string): EmailTemplate {
         
         <p>Quick question: How much time does your team spend writing the same boilerplate code over and over?</p>
         
-        <p>If it's more than a few hours per week, you're not alone. That's why we built the <strong>Code Generator Tool</strong>—one of the 5 tools in our DevOps Productivity Suite.</p>
+        <p>If it's more than a few hours per week, you're not alone. That's why I built the <strong>Code Generator Tool</strong>—one of the 5 tools in my DevOps Productivity Suite.</p>
         
         <p>Instead of manually writing:</p>
         <ul>
@@ -84,7 +84,7 @@ export function getPainPointEmail(firstname: string): EmailTemplate {
         
         <p>Your team generates them from templates in seconds.</p>
         
-        <p><strong>Real example:</strong> A 10-person team we worked with went from 8 hours/week on boilerplate to 30 minutes. That's 7.5 hours saved every week.</p>
+        <p>For a typical team, this can save 3-5 hours per developer per week. That's time you can spend on building features instead of repetitive code.</p>
         
         <p>Want to see how it works for your stack?</p>
         
@@ -124,7 +124,7 @@ export function getROIEmail(firstname: string): EmailTemplate {
           <li><strong>For a 5-person team:</strong> $6,000/month in lost productivity</li>
         </ul>
         
-        <p>Our DevOps Productivity Suite automates all of that.</p>
+        <p>My DevOps Productivity Suite automates all of that.</p>
         
         <p><strong>Setup cost:</strong> $2,997 one-time<br>
         <strong>Monthly support:</strong> $297/month<br>
@@ -158,7 +158,7 @@ export function getROIEmail(firstname: string): EmailTemplate {
 
 export function getSocialProofEmail(firstname: string): EmailTemplate {
   return {
-    subject: "How one team saved 6 hours/week per developer",
+    subject: "Here's how teams save 5+ hours/week per developer",
     html: `
       <!DOCTYPE html>
       <html>
@@ -169,9 +169,9 @@ export function getSocialProofEmail(firstname: string): EmailTemplate {
       <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
         <p>Hi ${firstname},</p>
         
-        <p>I wanted to share how one team transformed their DevOps workflow with our suite.</p>
+        <p>I wanted to share how teams typically transform their DevOps workflow with my suite.</p>
         
-        <p><strong>Before:</strong></p>
+        <p><strong>Before automation:</strong></p>
         <ul>
           <li>Manual CI/CD deployments (2 hours/week)</li>
           <li>Writing boilerplate code (3 hours/week)</li>
@@ -179,7 +179,7 @@ export function getSocialProofEmail(firstname: string): EmailTemplate {
           <li><strong>Total:</strong> 6 hours/week per developer</li>
         </ul>
         
-        <p><strong>After:</strong></p>
+        <p><strong>After automation:</strong></p>
         <ul>
           <li>Automated CI/CD (15 min/week)</li>
           <li>Code generation (30 min/week)</li>
@@ -191,7 +191,7 @@ export function getSocialProofEmail(firstname: string): EmailTemplate {
         
         <p>For a 5-person team, that's 25 hours/week saved. Over a year, that's 1,300 hours—worth $130,000+ at $100/hour.</p>
         
-        <p>Want to see how we can do the same for your team?</p>
+        <p>Want to see how I can help your team achieve similar results?</p>
         
         <p style="margin: 30px 0;">
           <a href="https://calendly.com/kyjahn-smith/consultation" 
@@ -226,14 +226,14 @@ export function getFinalPushEmail(firstname: string): EmailTemplate {
         
         <ol>
           <li><strong>Zero risk:</strong> 30-day money-back guarantee on setup</li>
-          <li><strong>Customized:</strong> We configure everything for your specific tech stack</li>
+          <li><strong>Customized:</strong> I configure everything for your specific tech stack</li>
           <li><strong>Supported:</strong> Ongoing updates and priority support included</li>
           <li><strong>Proven:</strong> Production-ready tools used by real teams</li>
         </ol>
         
         <p><strong>The consultation is free.</strong> No pressure, no sales pitch—just a conversation about your team's needs.</p>
         
-        <p>If it's not a fit, I'll tell you. If it is, I'll show you exactly how we can help.</p>
+        <p>If it's not a fit, I'll tell you. If it is, I'll show you exactly how I can help.</p>
         
         <p style="margin: 30px 0;">
           <a href="https://calendly.com/kyjahn-smith/consultation" 

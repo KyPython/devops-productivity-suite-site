@@ -2,6 +2,7 @@ import { VercelRequest, VercelResponse } from '@vercel/node';
 import { emailService } from '../services/email-service';
 import { logger } from '../utils/logger';
 import { scheduledEmailStorage } from '../services/scheduled-email-storage';
+import { hubspotService } from '../services/hubspot-service';
 
 /**
  * Cron job endpoint to process scheduled emails
@@ -32,10 +33,27 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     let processed = 0;
     let failed = 0;
+    let skipped = 0;
 
     // Process each due email
     for (const scheduledEmail of dueEmails) {
       try {
+        // Check if contact has replied before sending
+        const hasReplied = await hubspotService.hasContactReplied(scheduledEmail.email);
+        
+        if (hasReplied) {
+          logger.info('Skipping email - contact has replied', {
+            id: scheduledEmail.id,
+            email: scheduledEmail.email,
+            subject: scheduledEmail.subject,
+          });
+          
+          // Mark as sent (so we don't try again) but log as skipped
+          await scheduledEmailStorage.markAsSent(scheduledEmail.id);
+          skipped++;
+          continue;
+        }
+
         await emailService.sendEmail({
           to: scheduledEmail.email,
           subject: scheduledEmail.subject,
@@ -60,13 +78,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
-    logger.info('Email queue processed', { processed, failed, total: dueEmails.length });
+    logger.info('Email queue processed', { processed, failed, skipped, total: dueEmails.length });
 
     res.status(200).json({ 
       success: true, 
-      message: `Email queue processed: ${processed} sent, ${failed} failed`,
+      message: `Email queue processed: ${processed} sent, ${failed} failed, ${skipped} skipped (replied)`,
       processed,
       failed,
+      skipped,
       total: dueEmails.length
     });
   } catch (error) {

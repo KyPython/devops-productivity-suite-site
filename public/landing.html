@@ -1253,6 +1253,26 @@
                         </ul>
                     </div>
                     <div class="lead-capture-form-wrapper">
+                        <!-- HubSpot Form Embed Code -->
+                        <!-- Replace this comment with your HubSpot form embed code -->
+                        <!-- To get your form embed code:
+                             1. Go to HubSpot > Marketing > Forms
+                             2. Create or edit your form
+                             3. Click "Options" > "Embed" 
+                             4. Copy the embed code and paste it below -->
+                        <!-- 
+                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
+                        <script>
+                          hbspt.forms.create({
+                            region: "na1",
+                            portalId: "YOUR_PORTAL_ID",
+                            formId: "YOUR_FORM_ID",
+                            target: '.lead-capture-form-wrapper'
+                          });
+                        </script>
+                        -->
+                        
+                        <!-- Fallback form (remove this once HubSpot form is embedded above) -->
                         <form class="lead-capture-form" id="leadCaptureForm">
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
@@ -1357,7 +1377,40 @@
             observer.observe(el);
         });
 
-        // Lead Capture Form Submission
+        // HubSpot Form Submission Handler
+        // Listen for HubSpot form submissions and trigger email sequence
+        window.addEventListener('message', function(event) {
+            // HubSpot forms send messages when submitted
+            if (event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmitted') {
+                const formData = event.data.data;
+                const email = formData.email || formData.emailAddress;
+                const firstname = formData.firstname || formData.firstName || 'Friend';
+                
+                if (email) {
+                    // Trigger email sequence via webhook
+                    fetch('/api/webhooks/hubspot-form', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            submissionData: {
+                                email: email,
+                                firstname: firstname,
+                                fields: Object.keys(formData).map(key => ({
+                                    name: key,
+                                    value: formData[key]
+                                }))
+                            }
+                        })
+                    }).catch(err => {
+                        console.error('Failed to trigger email sequence:', err);
+                    });
+                }
+            }
+        });
+
+        // Fallback: Lead Capture Form Submission (for custom form if HubSpot form not embedded)
         const leadForm = document.getElementById('leadCaptureForm');
         if (leadForm) {
             leadForm.addEventListener('submit', async function(e) {
