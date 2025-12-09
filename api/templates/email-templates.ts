@@ -255,6 +255,49 @@ export function getFinalPushEmail(firstname: string): EmailTemplate {
   };
 }
 
+export function getFollowUpEmail(firstname: string): EmailTemplate {
+  return {
+    subject: "Still interested in DevOps automation?",
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      </head>
+      <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <p>Hi ${firstname},</p>
+        
+        <p>Haven't heard from you—wanted to check if you're still interested in automating your DevOps workflow.</p>
+        
+        <p>If not, no problem! Just reply "unsubscribe" and I'll remove you from future emails.</p>
+        
+        <p>If yes, here's the link to book a call:</p>
+        
+        <p style="margin: 30px 0;">
+          <a href="https://calendly.com/kyjahn-smith/consultation" 
+             style="background: #1560BD; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+            Book Your Free Consultation
+          </a>
+        </p>
+        
+        <p>Or reply to this email with any questions.</p>
+        
+        <p>Best,<br>Kyjahn Smith</p>
+        
+        <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 40px 0 20px;">
+        
+        <p style="font-size: 0.85em; color: #718096; text-align: center;">
+          You received this email because you requested the DevOps Automation Checklist.<br>
+          <a href="{{unsubscribe_url}}" style="color: #718096; text-decoration: underline;">Unsubscribe</a> | 
+          <a href="{{site_url}}" style="color: #718096; text-decoration: underline;">Update Preferences</a>
+        </p>
+      </body>
+      </html>
+    `
+  };
+}
+
 export function getChecklistEmail(firstname: string): EmailTemplate {
   return {
     subject: "Your DevOps Automation Checklist is ready!",

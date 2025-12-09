@@ -6,11 +6,13 @@ import {
   getROIEmail,
   getSocialProofEmail,
   getFinalPushEmail,
+  getFollowUpEmail,
   getChecklistEmail
 } from '../templates/email-templates';
 import * as fs from 'fs';
 import * as path from 'path';
 import { VercelRequest } from '@vercel/node';
+import { scheduledEmailStorage } from './scheduled-email-storage';
 
 export interface EmailSchedule {
   email: string;
@@ -49,6 +51,9 @@ export class EmailQueueService {
     // Email 5: Final Push (Day 14 = 13 days after welcome)
     await this.scheduleEmail(email, firstname, getFinalPushEmail, 13 * 24 * 60 * 60 * 1000, sequenceStartDate);
 
+    // Email 6: Follow-up (Day 21 = 20 days after welcome, 7 days after final push)
+    await this.scheduleEmail(email, firstname, getFollowUpEmail, 20 * 24 * 60 * 60 * 1000, sequenceStartDate);
+
     logger.info('Email sequence scheduled', { email, sequenceStartDate });
   }
 
@@ -80,9 +85,15 @@ export class EmailQueueService {
         scheduledFor: new Date(Date.now() + delayMs) 
       });
       
-      // Store in a queue/database for processing by a cron job
-      // For now, we'll log it - you'll need to set up a cron job to process these
-      await this.storeScheduledEmail(email, template.subject, template.html, delayMs);
+      // Store in queue for processing by cron job
+      const scheduledFor = new Date(Date.now() + delayMs);
+      await scheduledEmailStorage.addScheduledEmail(
+        email,
+        firstname,
+        template.subject,
+        template.html,
+        scheduledFor
+      );
     }
   }
 
@@ -131,33 +142,6 @@ export class EmailQueueService {
     });
   }
 
-  /**
-   * Store scheduled email for later processing
-   * In production, use a database or job queue
-   */
-  private async storeScheduledEmail(
-    email: string,
-    subject: string,
-    html: string,
-    delayMs: number
-  ): Promise<void> {
-    // This is a placeholder - in production, store in a database
-    // For Vercel, consider using:
-    // - Inngest (serverless job queue)
-    // - Vercel Cron Jobs + database
-    // - External service like Zapier/Make.com
-    
-    const scheduledFor = new Date(Date.now() + delayMs);
-    
-    logger.info('Storing scheduled email', {
-      email,
-      subject,
-      scheduledFor: scheduledFor.toISOString()
-    });
-
-    // TODO: Store in database or job queue
-    // For now, we'll need to set up a cron job to process these
-  }
 }
 
 export const emailQueueService = new EmailQueueService();

@@ -1,6 +1,7 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { emailService } from '../services/email-service';
 import { logger } from '../utils/logger';
+import { scheduledEmailStorage } from '../services/scheduled-email-storage';
 
 /**
  * Cron job endpoint to process scheduled emails
@@ -25,33 +26,48 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     logger.info('Processing email queue');
 
-    // TODO: Fetch scheduled emails from database/job queue
-    // For now, this is a placeholder
-    // In production, you'd:
-    // 1. Query database for emails scheduled to send now
-    // 2. Send each email
-    // 3. Mark as sent or delete from queue
+    // Get all emails that are due to be sent
+    const dueEmails = await scheduledEmailStorage.getDueEmails();
+    logger.info('Found due emails', { count: dueEmails.length });
 
-    // Example structure:
-    // const scheduledEmails = await db.query(`
-    //   SELECT * FROM scheduled_emails 
-    //   WHERE scheduled_for <= NOW() 
-    //   AND sent = false
-    // `);
-    // 
-    // for (const email of scheduledEmails) {
-    //   await emailService.sendEmail({
-    //     to: email.to,
-    //     subject: email.subject,
-    //     html: email.html
-    //   });
-    //   await db.update('scheduled_emails', { sent: true }, { id: email.id });
-    // }
+    let processed = 0;
+    let failed = 0;
+
+    // Process each due email
+    for (const scheduledEmail of dueEmails) {
+      try {
+        await emailService.sendEmail({
+          to: scheduledEmail.email,
+          subject: scheduledEmail.subject,
+          html: scheduledEmail.html,
+        });
+
+        // Mark as sent
+        await scheduledEmailStorage.markAsSent(scheduledEmail.id);
+        processed++;
+        
+        logger.info('Scheduled email sent', {
+          id: scheduledEmail.id,
+          email: scheduledEmail.email,
+          subject: scheduledEmail.subject,
+        });
+      } catch (error) {
+        failed++;
+        logger.error('Failed to send scheduled email', error as Error, {
+          id: scheduledEmail.id,
+          email: scheduledEmail.email,
+        });
+      }
+    }
+
+    logger.info('Email queue processed', { processed, failed, total: dueEmails.length });
 
     res.status(200).json({ 
       success: true, 
-      message: 'Email queue processed',
-      processed: 0 // Update when implementing
+      message: `Email queue processed: ${processed} sent, ${failed} failed`,
+      processed,
+      failed,
+      total: dueEmails.length
     });
   } catch (error) {
     logger.error('Failed to process email queue', error as Error);
