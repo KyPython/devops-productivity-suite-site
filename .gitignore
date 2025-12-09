@@ -17,3 +17,37 @@ BUSINESS_MATERIALS/
 
 # Snyk Security Extension - AI Rules (auto-generated)
 .cursor/rules/snyk_rules.mdc
+
+# Private/Sensitive Files
+*.pem
+*.key
+*.p12
+*.pfx
+*.secret
+*.token
+*secret*
+*token*
+*password*
+*credential*
+*.bak
+*.backup
+*.tmp
+*.temp
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.sublime-*
+*.code-workspace
+
+# OS files
+Thumbs.db
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Temporary files
+*.swp
+*.swo
+*~
+*.orig
