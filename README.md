@@ -5,7 +5,7 @@ Marketing landing page and email automation for the DevOps Productivity Suite.
 ## Features
 
 - 🎨 Marketing landing page
-- 📊 Interactive presentation deck (`/presentation`)
+- 📊 Interactive presentation deck (`/presentation?token=YOUR_SECRET` - protected)
 - 📧 Automated email sequences (Resend integration)
 - 📎 PDF checklist delivery
 - 🔄 Lead capture and HubSpot integration
@@ -22,6 +22,7 @@ Marketing landing page and email automation for the DevOps Productivity Suite.
    RESEND_API_KEY=re_xxxxxxxxxxxxx
    FROM_EMAIL=onboarding@resend.dev
    FROM_NAME=DevOps Productivity Suite
+   PREVIEW_SECRET=your-secret-token-here  # For email preview endpoint
    ```
 3. Deploy!
 
@@ -42,6 +43,8 @@ Visit your Vercel URL - the landing page will be served at the root.
 ### Marketing & Lead Capture
 - `/api/lead-capture` - Form submission endpoint
 - `/api/send-email` - Manual email sending (testing)
+- `/api/preview-emails?token=YOUR_SECRET&format=html` - Preview email sequence (requires token)
+- `/presentation?token=YOUR_SECRET` - Interactive presentation deck (requires token)
 
 ### Business Automation
 - `/api/clients` - Client management (CRUD)

@@ -14,7 +14,8 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
   res.setHeader('Content-Type', 'application/json');
 
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
   }
 
   try {
@@ -51,7 +52,8 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
 
     if (!email) {
       logger.warn('HubSpot webhook missing email', { body });
-      return res.status(400).json({ error: 'Missing email in webhook payload' });
+      res.status(400).json({ error: 'Missing email in webhook payload' });
+      return;
     }
 
     // Validate email

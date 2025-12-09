@@ -7,7 +7,7 @@
     },
     {
       "source": "/presentation",
-      "destination": "/presentation.html"
+      "destination": "/api/presentation"
     }
   ],
   "crons": [
