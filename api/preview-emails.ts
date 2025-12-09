@@ -99,21 +99,16 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
   ];
 
   // Helper function to escape HTML for use in srcdoc attribute (double-quoted)
-  // Only escape quotes and ampersands that would break the attribute
-  // Clean up whitespace to ensure consistent rendering
+  // Properly escape HTML entities and clean up whitespace for clean rendering
   const escapeHtmlForSrcdoc = (str: string): string => {
     return str
-      // First escape HTML entities
+      // First escape HTML entities (must be first to avoid double-escaping)
       .replace(/&/g, '&amp;')
       .replace(/"/g, '&quot;')
-      // Clean up whitespace: collapse multiple spaces/tabs to single space
-      .replace(/[ \t]+/g, ' ')
-      // Remove newlines that are just whitespace between tags
+      // Remove all newlines and extra whitespace - HTML doesn't need them
+      .replace(/\s+/g, ' ')
+      // Remove whitespace between tags
       .replace(/>\s+</g, '><')
-      // Remove leading/trailing whitespace from each line
-      .split('\n')
-      .map(line => line.trim())
-      .join(' ')
       // Final trim
       .trim();
   };

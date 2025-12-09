@@ -37,7 +37,7 @@ export class HubSpotService {
               value: email
             }]
           }],
-          properties: ['email', 'firstname', 'hs_email_replied', 'hs_last_contacted_date', 'hs_email_optout']
+          properties: ['email', 'firstname', 'hs_email_replied', 'hs_last_contacted_date', 'hs_email_optout', 'hs_email_sequence_data']
         })
       });
 
@@ -145,7 +145,8 @@ export class HubSpotService {
               operator: 'EQ',
               value: email
             }]
-          }]
+          }],
+          properties: ['email', 'firstname', 'hs_email_sequence_data', 'hs_email_optout', 'hs_email_replied']
         })
       });
 
@@ -161,6 +162,65 @@ export class HubSpotService {
     } catch (error) {
       logger.error('Error getting HubSpot contact', error as Error, { email });
       return null;
+    }
+  }
+
+  /**
+   * Get all contacts with scheduled email sequences
+   * Searches for contacts that have the hs_email_sequence_data property set
+   */
+  async getContactsWithScheduledEmails(): Promise<Array<{ email: string; contactId: string }>> {
+    if (!this.apiKey) {
+      return [];
+    }
+
+    try {
+      // Search for contacts that have hs_email_sequence_data property
+      // Note: This requires the property to exist. If it doesn't exist yet, returns empty.
+      const searchUrl = `https://api.hubapi.com/crm/v3/objects/contacts/search`;
+      const searchResponse = await fetch(searchUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`
+        },
+        body: JSON.stringify({
+          filterGroups: [{
+            filters: [{
+              propertyName: 'hs_email_sequence_data',
+              operator: 'HAS_PROPERTY'
+            }]
+          }],
+          properties: ['email', 'hs_email_sequence_data'],
+          limit: 100
+        })
+      });
+
+      if (!searchResponse.ok) {
+        logger.warn('Failed to search contacts with scheduled emails', { status: searchResponse.status });
+        return [];
+      }
+
+      const searchResult = await searchResponse.json() as {
+        results?: Array<{ 
+          id: string; 
+          properties?: { 
+            email?: string;
+            hs_email_sequence_data?: string;
+          } 
+        }>;
+      };
+
+      const contacts = searchResult.results || [];
+      return contacts
+        .filter(c => c.properties?.email)
+        .map(c => ({
+          email: c.properties!.email!,
+          contactId: c.id
+        }));
+    } catch (error) {
+      logger.error('Error getting contacts with scheduled emails', error as Error);
+      return [];
     }
   }
 

@@ -27,66 +27,88 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     logger.info('Processing email queue');
 
-    // Get all emails that are due to be sent
-    const dueEmails = await scheduledEmailStorage.getDueEmails();
-    logger.info('Found due emails', { count: dueEmails.length });
+    // Get all contacts with scheduled emails from HubSpot
+    const contactsWithSequences = await hubspotService.getContactsWithScheduledEmails();
+    logger.info('Found contacts with scheduled emails', { count: contactsWithSequences.length });
 
     let processed = 0;
     let failed = 0;
     let skipped = 0;
 
-    // Process each due email
-    for (const scheduledEmail of dueEmails) {
+    // Process each contact's scheduled emails
+    for (const contact of contactsWithSequences) {
       try {
-        // Check if contact has replied before sending
-        const hasReplied = await hubspotService.hasContactReplied(scheduledEmail.email);
+        // Get due emails for this contact
+        const dueEmails = await scheduledEmailStorage.getDueEmailsForContact(contact.email);
         
-        if (hasReplied) {
-          logger.info('Skipping email - contact has replied', {
-            id: scheduledEmail.id,
-            email: scheduledEmail.email,
-            subject: scheduledEmail.subject,
-          });
-          
-          // Mark as sent (so we don't try again) but log as skipped
-          await scheduledEmailStorage.markAsSent(scheduledEmail.id);
-          skipped++;
+        if (dueEmails.length === 0) {
           continue;
         }
 
-        await emailService.sendEmail({
-          to: scheduledEmail.email,
-          subject: scheduledEmail.subject,
-          html: scheduledEmail.html,
+        logger.info('Processing due emails for contact', { 
+          email: contact.email, 
+          count: dueEmails.length 
         });
 
-        // Mark as sent
-        await scheduledEmailStorage.markAsSent(scheduledEmail.id);
-        processed++;
-        
-        logger.info('Scheduled email sent', {
-          id: scheduledEmail.id,
-          email: scheduledEmail.email,
-          subject: scheduledEmail.subject,
-        });
+        // Process each due email for this contact
+        for (const scheduledEmail of dueEmails) {
+          try {
+            // Check if contact has replied or opted out before sending
+            const hasReplied = await hubspotService.hasContactReplied(scheduledEmail.email);
+            
+            if (hasReplied) {
+              logger.info('Skipping email - contact has replied or opted out', {
+                id: scheduledEmail.id,
+                email: scheduledEmail.email,
+                subject: scheduledEmail.subject,
+              });
+              
+              // Mark as sent (so we don't try again) but log as skipped
+              await scheduledEmailStorage.markAsSent(scheduledEmail.id, scheduledEmail.email);
+              skipped++;
+              continue;
+            }
+
+            await emailService.sendEmail({
+              to: scheduledEmail.email,
+              subject: scheduledEmail.subject,
+              html: scheduledEmail.html,
+            });
+
+            // Mark as sent
+            await scheduledEmailStorage.markAsSent(scheduledEmail.id, scheduledEmail.email);
+            processed++;
+            
+            logger.info('Scheduled email sent', {
+              id: scheduledEmail.id,
+              email: scheduledEmail.email,
+              subject: scheduledEmail.subject,
+            });
+          } catch (error) {
+            failed++;
+            logger.error('Failed to send scheduled email', error as Error, {
+              id: scheduledEmail.id,
+              email: scheduledEmail.email,
+            });
+          }
+        }
       } catch (error) {
-        failed++;
-        logger.error('Failed to send scheduled email', error as Error, {
-          id: scheduledEmail.id,
-          email: scheduledEmail.email,
+        logger.error('Failed to process contact scheduled emails', error as Error, {
+          email: contact.email,
         });
       }
     }
 
-    logger.info('Email queue processed', { processed, failed, skipped, total: dueEmails.length });
+    const total = processed + failed + skipped;
+    logger.info('Email queue processed', { processed, failed, skipped, total });
 
     res.status(200).json({ 
       success: true, 
-      message: `Email queue processed: ${processed} sent, ${failed} failed, ${skipped} skipped (replied)`,
+      message: `Email queue processed: ${processed} sent, ${failed} failed, ${skipped} skipped (replied/opted out)`,
       processed,
       failed,
       skipped,
-      total: dueEmails.length
+      total
     });
   } catch (error) {
     logger.error('Failed to process email queue', error as Error);
