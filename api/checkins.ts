@@ -83,7 +83,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
 
       logger.info('Monthly check-in generated', { clientId, month, year });
 
-      return res.status(200).json({
+      res.status(200).json({
         success: true,
         message: sendEmail ? 'Monthly check-in generated and sent' : 'Monthly check-in generated',
         data: checkinContent,

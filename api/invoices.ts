@@ -83,7 +83,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
       logger.info('Invoice markdown sent via email', { clientId });
     }
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       message: sendEmail ? 'Invoice generated and sent' : 'Invoice generated',
       data: invoiceContent,

@@ -43,7 +43,7 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
       }
 
       const clients = await clientStorage.getAllClients();
-      return res.status(200).json({ success: true, data: clients });
+      res.status(200).json({ success: true, data: clients });
     }
 
     // POST - Create new client
