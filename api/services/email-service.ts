@@ -41,6 +41,7 @@ export class EmailService {
         : 'https://your-domain.vercel.app';
       const unsubscribeToken = Buffer.from(`${data.to}:${Date.now()}`).toString('base64');
       const unsubscribeUrl = `${siteUrl}/api/unsubscribe?email=${encodeURIComponent(data.to)}&token=${unsubscribeToken}`;
+      const preferencesUrl = `${siteUrl}/api/preferences?email=${encodeURIComponent(data.to)}`;
       
       // Replace placeholders in HTML
       let htmlWithUnsubscribe = data.html.replace(
@@ -49,7 +50,7 @@ export class EmailService {
       );
       htmlWithUnsubscribe = htmlWithUnsubscribe.replace(
         /\{\{site_url\}\}/g,
-        siteUrl
+        preferencesUrl
       );
 
       const result = await resend.emails.send({

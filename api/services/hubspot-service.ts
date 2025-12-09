@@ -163,6 +163,55 @@ export class HubSpotService {
       return null;
     }
   }
+
+  /**
+   * Unsubscribe a contact from emails
+   * Sets hs_email_optout to true in HubSpot
+   */
+  async unsubscribeContact(email: string): Promise<boolean> {
+    if (!this.apiKey) {
+      logger.warn('HubSpot API key not configured, cannot unsubscribe contact');
+      return false;
+    }
+
+    try {
+      const contact = await this.getContactByEmail(email);
+      if (!contact) {
+        logger.warn('Contact not found for unsubscribe', { email });
+        return false;
+      }
+
+      // Update contact to opt out
+      const updateUrl = `https://api.hubapi.com/crm/v3/objects/contacts/${contact.id}`;
+      const updateResponse = await fetch(updateUrl, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`
+        },
+        body: JSON.stringify({
+          properties: {
+            hs_email_optout: 'true'
+          }
+        })
+      });
+
+      if (!updateResponse.ok) {
+        logger.error('Failed to unsubscribe contact in HubSpot', undefined, { 
+          email, 
+          contactId: contact.id,
+          status: updateResponse.status 
+        });
+        return false;
+      }
+
+      logger.info('Contact unsubscribed successfully', { email, contactId: contact.id });
+      return true;
+    } catch (error) {
+      logger.error('Error unsubscribing contact', error as Error, { email });
+      return false;
+    }
+  }
 }
 
 export const hubspotService = new HubSpotService();
