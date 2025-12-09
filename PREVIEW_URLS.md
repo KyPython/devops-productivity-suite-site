@@ -40,12 +40,12 @@ https://YOUR_DOMAIN/presentation?token=preview-secret-change-me
 
 ---
 
-## Example URLs (Replace with your domain)
+## Your URLs (Ready to Use)
 
-If your domain is `devops-productivity-suite.vercel.app`:
+**Your domain:** `devops-productivity-suite-site.vercel.app`
 
-- **Email Preview:** `https://devops-productivity-suite.vercel.app/api/preview-emails?token=preview-secret-change-me&format=html`
-- **Presentation:** `https://devops-productivity-suite.vercel.app/presentation?token=preview-secret-change-me`
+- **Email Preview:** `https://devops-productivity-suite-site.vercel.app/api/preview-emails?token=preview-secret-change-me&format=html`
+- **Presentation:** `https://devops-productivity-suite-site.vercel.app/presentation?token=preview-secret-change-me`
 
 ---
 
