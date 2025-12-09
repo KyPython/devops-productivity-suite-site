@@ -88,3 +88,16 @@ export function validateRequired<T>(value: T | null | undefined, fieldName: stri
   return value;
 }
 
+export function validateEmail(value: unknown, fieldName: string = 'email'): string {
+  const email = validateString(value, fieldName);
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    throw new AppError(
+      ErrorCode.VALIDATION_ERROR,
+      `${fieldName} must be a valid email address`,
+      400
+    );
+  }
+  return email;
+}
+

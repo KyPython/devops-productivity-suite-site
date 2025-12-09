@@ -5,10 +5,12 @@ Marketing landing page and email automation for the DevOps Productivity Suite.
 ## Features
 
 - 🎨 Marketing landing page
+- 📊 Interactive presentation deck (`/presentation`)
 - 📧 Automated email sequences (Resend integration)
 - 📎 PDF checklist delivery
 - 🔄 Lead capture and HubSpot integration
 - ⚡ Serverless API endpoints (Vercel)
+- 🤖 Business automation system (client management, invoices, support tickets)
 
 ## Quick Start
 
@@ -32,11 +34,24 @@ Visit your Vercel URL - the landing page will be served at the root.
 - `HOW_TO_TEST.md` - Testing guide
 - `ENV_VARIABLES.md` - Environment variable setup
 - `QUICK_START_EMAILS.md` - Email setup guide
+- `BUSINESS_AUTOMATION.md` - Complete business automation API documentation
+- `BUSINESS_AUTOMATION_QUICKSTART.md` - Quick start guide for business automation
 
 ## API Endpoints
 
+### Marketing & Lead Capture
 - `/api/lead-capture` - Form submission endpoint
 - `/api/send-email` - Manual email sending (testing)
+
+### Business Automation
+- `/api/clients` - Client management (CRUD)
+- `/api/invoices` - Invoice generation
+- `/api/support-tickets` - Support ticket creation
+- `/api/checkins` - Monthly check-in management
+- `/api/onboarding` - Onboarding progress tracking
+- `/api/workflows` - Workflow automation triggers
+
+See `BUSINESS_AUTOMATION.md` for complete API documentation.
 
 ## Structure
 
@@ -52,6 +67,7 @@ Visit your Vercel URL - the landing page will be served at the root.
 │   │   └── email-templates.ts # Email templates
 │   └── utils/                # Shared utilities
 ├── public/
-│   └── landing.html          # Marketing landing page
+│   ├── landing.html          # Marketing landing page
+│   └── presentation.html     # Interactive presentation deck
 └── scripts/                  # Utility scripts
 ```

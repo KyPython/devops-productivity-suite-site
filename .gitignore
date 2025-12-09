@@ -10,6 +10,7 @@ coverage/
 *.swo
 *~
 .vercel
+.data/
 
 # Business Materials (Private)
 BUSINESS_MATERIALS/

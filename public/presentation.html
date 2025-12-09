@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevOps Productivity Suite</title>
+
+    <style>
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        body {
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 100vh;
+
+            padding: 20px;
+
+        }
+
+
+
+        .presentation {
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            aspect-ratio: 16/9;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+
+            overflow: hidden;
+
+            position: relative;
+
+        }
+
+
+
+        .slide {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: none;
+
+            padding: 60px 80px;
+
+            position: relative;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        }
+
+
+
+        .slide.active {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+
+
+        .slide-number {
+
+            position: absolute;
+
+            bottom: 20px;
+
+            right: 30px;
+
+            color: rgba(255,255,255,0.6);
+
+            font-size: 14px;
+
+        }
+
+
+
+        /* Title Slide */
+
+        .slide.title-slide {
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+        }
+
+
+
+        .slide.title-slide h1 {
+
+            font-size: 64px;
+
+            color: white;
+
+            margin-bottom: 20px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .slide.title-slide .subtitle {
+
+            font-size: 28px;
+
+            color: rgba(255,255,255,0.9);
+
+            margin-bottom: 60px;
+
+        }
+
+
+
+        .slide.title-slide .info {
+
+            font-size: 18px;
+
+            color: rgba(255,255,255,0.8);
+
+        }
+
+
+
+        /* Content Slides */
+
+        .slide.content-slide {
+
+            background: white;
+
+        }
+
+
+
+        .slide h2 {
+
+            font-size: 48px;
+
+            color: #667eea;
+
+            margin-bottom: 40px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .slide.content-slide h2 {
+
+            color: #2d3748;
+
+        }
+
+
+
+        .content-grid {
+
+            display: grid;
+
+            gap: 20px;
+
+            flex: 1;
+
+        }
+
+
+
+        .bullet-point {
+
+            display: flex;
+
+            align-items: center;
+
+            font-size: 24px;
+
+            color: #4a5568;
+
+            padding: 15px;
+
+            background: #f7fafc;
+
+            border-radius: 10px;
+
+            border-left: 4px solid #667eea;
+
+        }
+
+
+
+        .bullet-point::before {
+
+            content: "▸";
+
+            color: #667eea;
+
+            font-size: 32px;
+
+            margin-right: 15px;
+
+        }
+
+
+
+        /* Stats */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 30px;
+
+            margin-top: 40px;
+
+        }
+
+
+
+        .stat-card {
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            color: white;
+
+        }
+
+
+
+        .stat-value {
+
+            font-size: 48px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+
+        }
+
+
+
+        .stat-label {
+
+            font-size: 18px;
+
+            opacity: 0.9;
+
+        }
+
+
+
+        /* Tools Grid */
+
+        .tools-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(5, 1fr);
+
+            gap: 20px;
+
+            margin-top: 40px;
+
+        }
+
+
+
+        .tool-card {
+
+            background: #f7fafc;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            border: 2px solid #e2e8f0;
+
+            transition: all 0.3s;
+
+        }
+
+
+
+        .tool-card:hover {
+
+            transform: translateY(-5px);
+
+            border-color: #667eea;
+
+            box-shadow: 0 10px 30px rgba(102,126,234,0.2);
+
+        }
+
+
+
+        .tool-number {
+
+            width: 50px;
+
+            height: 50px;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 15px;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .tool-name {
+
+            font-size: 14px;
+
+            color: #2d3748;
+
+            font-weight: 600;
+
+        }
+
+
+
+        /* Tool Detail Slide */
+
+        .tool-detail {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 40px;
+
+            margin-top: 30px;
+
+        }
+
+
+
+        .tool-info h3 {
+
+            font-size: 32px;
+
+            color: #667eea;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .feature {
+
+            padding: 15px;
+
+            margin-bottom: 15px;
+
+            background: #f7fafc;
+
+            border-radius: 10px;
+
+            font-size: 20px;
+
+            color: #4a5568;
+
+        }
+
+
+
+        .benefit {
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            padding: 30px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+        }
+
+
+
+        .benefit-title {
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            margin-bottom: 15px;
+
+        }
+
+
+
+        .benefit-value {
+
+            font-size: 36px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        /* Timeline */
+
+        .timeline {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 30px;
+
+            margin-top: 40px;
+
+        }
+
+
+
+        .timeline-item {
+
+            text-align: center;
+
+            position: relative;
+
+        }
+
+
+
+        .timeline-week {
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            padding: 15px 30px;
+
+            border-radius: 10px;
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .timeline-content {
+
+            font-size: 20px;
+
+            color: #4a5568;
+
+        }
+
+
+
+        /* ROI Slide */
+
+        .roi-comparison {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 40px;
+
+            margin-top: 30px;
+
+        }
+
+
+
+        .roi-box {
+
+            padding: 40px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+        }
+
+
+
+        .roi-box.investment {
+
+            background: #f7fafc;
+
+            border: 3px solid #e2e8f0;
+
+        }
+
+
+
+        .roi-box.return {
+
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+
+            color: white;
+
+        }
+
+
+
+        .roi-title {
+
+            font-size: 32px;
+
+            font-weight: 700;
+
+            margin-bottom: 30px;
+
+        }
+
+
+
+        .roi-amount {
+
+            font-size: 56px;
+
+            font-weight: 700;
+
+            margin-bottom: 20px;
+
+        }
+
+
+
+        .roi-detail {
+
+            font-size: 20px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+
+        /* CTA */
+
+        .cta-container {
+
+            text-align: center;
+
+            margin-top: 40px;
+
+        }
+
+
+
+        .cta-button {
+
+            display: inline-block;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            padding: 25px 60px;
+
+            border-radius: 50px;
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            transition: all 0.3s;
+
+            box-shadow: 0 10px 30px rgba(102,126,234,0.3);
+
+        }
+
+
+
+        .cta-button:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow: 0 15px 40px rgba(102,126,234,0.4);
+
+        }
+
+
+
+        .cta-steps {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 20px;
+
+            margin-bottom: 40px;
+
+        }
+
+
+
+        .cta-step {
+
+            text-align: center;
+
+            padding: 20px;
+
+        }
+
+
+
+        .step-number {
+
+            width: 60px;
+
+            height: 60px;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 15px;
+
+            font-size: 32px;
+
+            font-weight: 700;
+
+        }
+
+
+
+        .step-text {
+
+            font-size: 18px;
+
+            color: #4a5568;
+
+        }
+
+
+
+        /* Navigation */
+
+        .nav-buttons {
+
+            position: absolute;
+
+            bottom: 30px;
+
+            left: 30px;
+
+            display: flex;
+
+            gap: 15px;
+
+        }
+
+        /* Fullscreen Button */
+
+        .fullscreen-btn {
+
+            position: absolute;
+
+            top: 30px;
+
+            right: 30px;
+
+            background: rgba(102,126,234,0.2);
+
+            color: #667eea;
+
+            border: 2px solid #667eea;
+
+            padding: 12px 24px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            transition: all 0.3s;
+
+            z-index: 1000;
+
+        }
+
+        .fullscreen-btn:hover {
+
+            background: #667eea;
+
+            color: white;
+
+        }
+
+        /* Presentation Mode Indicator */
+
+        .presentation-mode {
+
+            position: fixed;
+
+            top: 20px;
+
+            left: 20px;
+
+            background: rgba(0,0,0,0.7);
+
+            color: white;
+
+            padding: 10px 20px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            z-index: 1001;
+
+            display: none;
+
+        }
+
+        .presentation-mode.active {
+
+            display: block;
+
+        }
+
+        /* Keyboard Shortcuts Help */
+
+        .shortcuts-help {
+
+            position: fixed;
+
+            bottom: 20px;
+
+            right: 20px;
+
+            background: rgba(0,0,0,0.8);
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+
+            z-index: 1001;
+
+            display: none;
+
+            max-width: 200px;
+
+        }
+
+        .shortcuts-help.active {
+
+            display: block;
+
+        }
+
+        .shortcuts-help kbd {
+
+            background: #333;
+
+            padding: 2px 6px;
+
+            border-radius: 3px;
+
+            font-family: monospace;
+
+        }
+
+
+
+        .nav-btn {
+
+            background: rgba(102,126,234,0.2);
+
+            color: #667eea;
+
+            border: none;
+
+            padding: 12px 24px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            transition: all 0.3s;
+
+        }
+
+
+
+        .nav-btn:hover {
+
+            background: #667eea;
+
+            color: white;
+
+        }
+
+
+
+        .nav-btn:disabled {
+
+            opacity: 0.3;
+
+            cursor: not-allowed;
+
+        }
+
+
+
+        /* Contact Slide */
+
+        .contact-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 40px;
+
+            margin-top: 60px;
+
+        }
+
+
+
+        .contact-item {
+
+            text-align: center;
+
+        }
+
+
+
+        .contact-icon {
+
+            width: 80px;
+
+            height: 80px;
+
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 20px;
+
+            font-size: 40px;
+
+        }
+
+
+
+        .contact-label {
+
+            font-size: 20px;
+
+            color: #718096;
+
+            margin-bottom: 10px;
+
+        }
+
+
+
+        .contact-value {
+
+            font-size: 18px;
+
+            color: #2d3748;
+
+            font-weight: 600;
+
+            word-break: break-word;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="presentation">
+
+        <!-- Slide 1: Title -->
+
+        <div class="slide title-slide active">
+
+            <h1>DevOps Productivity Suite</h1>
+
+            <div class="subtitle">Eliminate Repetitive Tasks. Ship Faster. Maintain Quality.</div>
+
+            <div class="info">
+
+                <div style="margin-bottom: 10px;">Ky Jahn-Smith</div>
+
+                <div>December 2025</div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Slide 2: The Problem -->
+
+        <div class="slide content-slide">
+
+            <h2>Your Team is Wasting 5+ Hours Per Developer Per Week</h2>
+
+            <div class="content-grid">
+
+                <div class="bullet-point">Manual CI/CD deployments</div>
+
+                <div class="bullet-point">Writing the same boilerplate code</div>
+
+                <div class="bullet-point">Inconsistent code quality</div>
+
+                <div class="bullet-point">Merge conflicts and code conflicts</div>
+
+                <div class="bullet-point">Slow onboarding for new developers</div>
+
+            </div>
+
+            <div class="slide-number">2 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 3: The Cost -->
+
+        <div class="slide content-slide">
+
+            <h2>What This Costs Your Team</h2>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-value">$500</div>
+
+                    <div class="stat-label">Per Developer / Week</div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-value">$10K</div>
+
+                    <div class="stat-label">5-Person Team / Month</div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-value">$120K</div>
+
+                    <div class="stat-label">Annual Lost Productivity</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">3 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 4: The Solution -->
+
+        <div class="slide content-slide">
+
+            <h2>5 Production-Ready Tools. One Complete Suite.</h2>
+
+            <div class="tools-grid">
+
+                <div class="tool-card">
+
+                    <div class="tool-number">1</div>
+
+                    <div class="tool-name">Shell Games Toolkit</div>
+
+                </div>
+
+                <div class="tool-card">
+
+                    <div class="tool-number">2</div>
+
+                    <div class="tool-name">Ubiquitous Automation</div>
+
+                </div>
+
+                <div class="tool-card">
+
+                    <div class="tool-number">3</div>
+
+                    <div class="tool-name">Git Workflows Sample</div>
+
+                </div>
+
+                <div class="tool-card">
+
+                    <div class="tool-number">4</div>
+
+                    <div class="tool-name">Code Generator Tool</div>
+
+                </div>
+
+                <div class="tool-card">
+
+                    <div class="tool-number">5</div>
+
+                    <div class="tool-name">Software Entropy</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">4 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 5: Tool 1 -->
+
+        <div class="slide content-slide">
+
+            <h2>Tool 1: Shell Games Toolkit</h2>
+
+            <div class="tool-detail">
+
+                <div class="tool-info">
+
+                    <h3>Automate Common Dev Tasks</h3>
+
+                    <div class="feature">✓ Project scaffolding</div>
+
+                    <div class="feature">✓ Environment verification</div>
+
+                    <div class="feature">✓ Deployment automation</div>
+
+                </div>
+
+                <div class="benefit">
+
+                    <div class="benefit-title">Time Saved</div>
+
+                    <div class="benefit-value">1-2 hrs/week</div>
+
+                    <div style="margin-top: 15px;">per developer</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">5 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 6: Tool 2 -->
+
+        <div class="slide content-slide">
+
+            <h2>Tool 2: Ubiquitous Automation</h2>
+
+            <div class="tool-detail">
+
+                <div class="tool-info">
+
+                    <h3>Full CI/CD Pipeline Automation</h3>
+
+                    <div class="feature">✓ Automated testing</div>
+
+                    <div class="feature">✓ Code quality checks</div>
+
+                    <div class="feature">✓ Build automation</div>
+
+                    <div class="feature">✓ GitHub Actions integration</div>
+
+                </div>
+
+                <div class="benefit">
+
+                    <div class="benefit-title">Time Saved</div>
+
+                    <div class="benefit-value">2-3 hrs/week</div>
+
+                    <div style="margin-top: 15px;">per developer</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">6 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 7: Tool 3 -->
+
+        <div class="slide content-slide">
+
+            <h2>Tool 3: Git Workflows Sample</h2>
+
+            <div class="tool-detail">
+
+                <div class="tool-info">
+
+                    <h3>Standardize Your Git Workflow</h3>
+
+                    <div class="feature">✓ Branching strategy</div>
+
+                    <div class="feature">✓ PR templates</div>
+
+                    <div class="feature">✓ Code review process</div>
+
+                </div>
+
+                <div class="benefit">
+
+                    <div class="benefit-title">Impact</div>
+
+                    <div class="benefit-value">Fewer Conflicts</div>
+
+                    <div style="margin-top: 15px;">Faster reviews</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">7 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 8: Tool 4 -->
+
+        <div class="slide content-slide">
+
+            <h2>Tool 4: Code Generator Tool</h2>
+
+            <div class="tool-detail">
+
+                <div class="tool-info">
+
+                    <h3>Generate Boilerplate in Seconds</h3>
+
+                    <div class="feature">✓ Template-based code generation</div>
+
+                    <div class="feature">✓ Customizable patterns</div>
+
+                    <div class="feature">✓ Overwrite protection</div>
+
+                </div>
+
+                <div class="benefit">
+
+                    <div class="benefit-title">Time Saved</div>
+
+                    <div class="benefit-value">2-3 hrs/week</div>
+
+                    <div style="margin-top: 15px;">on repetitive code</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">8 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 9: Tool 5 -->
+
+        <div class="slide content-slide">
+
+            <h2>Tool 5: Software Entropy</h2>
+
+            <div class="tool-detail">
+
+                <div class="tool-info">
+
+                    <h3>Automatically Detect Technical Debt</h3>
+
+                    <div class="feature">✓ Code quality scanning</div>
+
+                    <div class="feature">✓ Technical debt detection</div>
+
+                    <div class="feature">✓ Configurable rules</div>
+
+                </div>
+
+                <div class="benefit">
+
+                    <div class="benefit-title">Impact</div>
+
+                    <div class="benefit-value">Early Detection</div>
+
+                    <div style="margin-top: 15px;">Prevent big problems</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">9 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 10: Implementation -->
+
+        <div class="slide content-slide">
+
+            <h2>3-Week Implementation</h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-week">Week 1</div>
+
+                    <div class="timeline-content">Discovery & Custom Configuration</div>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-week">Week 2</div>
+
+                    <div class="timeline-content">Setup & Integration</div>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-week">Week 3</div>
+
+                    <div class="timeline-content">Training & Handoff</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">10 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 11: ROI -->
+
+        <div class="slide content-slide">
+
+            <h2>Your Investment vs. Return</h2>
+
+            <div class="roi-comparison">
+
+                <div class="roi-box investment">
+
+                    <div class="roi-title" style="color: #2d3748;">Investment</div>
+
+                    <div class="roi-amount" style="color: #2d3748;">$6,561</div>
+
+                    <div class="roi-detail">Setup: $2,997</div>
+
+                    <div class="roi-detail">Year 1 Monthly: $3,564</div>
+
+                </div>
+
+                <div class="roi-box return">
+
+                    <div class="roi-title">Return</div>
+
+                    <div class="roi-amount">$120,000</div>
+
+                    <div class="roi-detail">Annual Value</div>
+
+                    <div class="roi-detail" style="font-size: 28px; margin-top: 20px; font-weight: 700;">ROI: 1,700%+</div>
+
+                    <div class="roi-detail" style="font-size: 24px; margin-top: 10px;">Payback: 2 months</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">11 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 12: What's Included -->
+
+        <div class="slide content-slide">
+
+            <h2>Everything You Need</h2>
+
+            <div class="tool-detail">
+
+                <div class="tool-info">
+
+                    <h3>Setup ($2,997)</h3>
+
+                    <div class="feature">✓ Custom configuration</div>
+
+                    <div class="feature">✓ Team integration</div>
+
+                    <div class="feature">✓ Documentation</div>
+
+                    <div class="feature">✓ 2-hour training</div>
+
+                    <div class="feature">✓ Source code access</div>
+
+                </div>
+
+                <div class="tool-info">
+
+                    <h3>Monthly ($297)</h3>
+
+                    <div class="feature">✓ Tool updates</div>
+
+                    <div class="feature">✓ Priority support</div>
+
+                    <div class="feature">✓ Custom templates</div>
+
+                    <div class="feature">✓ Workflow optimization</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">12 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 13: Social Proof -->
+
+        <div class="slide content-slide">
+
+            <h2>Trusted by Development Teams</h2>
+
+            <div style="background: #f7fafc; padding: 40px; border-radius: 15px; border-left: 5px solid #667eea; margin-top: 40px;">
+
+                <div style="font-size: 28px; color: #4a5568; font-style: italic; margin-bottom: 30px;">
+
+                    "Development teams consistently save 5+ hours per week, improving code quality and reducing onboarding time significantly."
+
+                </div>
+
+            </div>
+
+            <div class="stats-grid" style="margin-top: 40px;">
+
+                <div class="stat-card">
+
+                    <div class="stat-value">5+ hrs</div>
+
+                    <div class="stat-label">Saved Per Week</div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-value">↑</div>
+
+                    <div class="stat-label">Code Quality Improved</div>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <div class="stat-value">↓</div>
+
+                    <div class="stat-label">Onboarding Time Reduced</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">13 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 14: Next Steps -->
+
+        <div class="slide content-slide">
+
+            <h2>Ready to Transform Your DevOps Workflow?</h2>
+
+            <div class="cta-steps">
+
+                <div class="cta-step">
+
+                    <div class="step-number">1</div>
+
+                    <div class="step-text">Book a free 30-minute consultation</div>
+
+                </div>
+
+                <div class="cta-step">
+
+                    <div class="step-number">2</div>
+
+                    <div class="step-text">We assess your team's needs</div>
+
+                </div>
+
+                <div class="cta-step">
+
+                    <div class="step-number">3</div>
+
+                    <div class="step-text">Custom proposal within 24 hours</div>
+
+                </div>
+
+                <div class="cta-step">
+
+                    <div class="step-number">4</div>
+
+                    <div class="step-text">Start implementation in 1 week</div>
+
+                </div>
+
+            </div>
+
+            <div class="cta-container">
+
+                <a href="https://calendly.com/kyjahn-smith/consultation" class="cta-button" target="_blank">
+
+                    Book Your Free Consultation
+
+                </a>
+
+            </div>
+
+            <div class="slide-number">14 / 15</div>
+
+        </div>
+
+
+
+        <!-- Slide 15: Contact -->
+
+        <div class="slide content-slide">
+
+            <h2>Let's Talk</h2>
+
+            <div class="contact-grid">
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">📧</div>
+
+                    <div class="contact-label">Email</div>
+
+                    <div class="contact-value">contact@yourcompany.com</div>
+
+                </div>
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">📅</div>
+
+                    <div class="contact-label">Schedule a Call</div>
+
+                    <div class="contact-value">calendly.com/kyjahn-smith/consultation</div>
+
+                </div>
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">🌐</div>
+
+                    <div class="contact-label">Website</div>
+
+                    <div class="contact-value">www.yourcompany.com</div>
+
+                </div>
+
+            </div>
+
+            <div class="slide-number">15 / 15</div>
+
+        </div>
+
+
+
+        <!-- Navigation -->
+
+        <div class="nav-buttons">
+
+            <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Previous</button>
+
+            <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
+
+        </div>
+
+        <!-- Fullscreen Button -->
+
+        <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullscreen()" title="Press F11 for fullscreen">
+
+            ⛶ Fullscreen
+
+        </button>
+
+        <!-- Presentation Mode Indicator -->
+
+        <div class="presentation-mode" id="presentationMode">
+
+            🎯 Presentation Mode - Press ESC to exit
+
+        </div>
+
+        <!-- Keyboard Shortcuts Help -->
+
+        <div class="shortcuts-help" id="shortcutsHelp">
+
+            <strong>Keyboard Shortcuts:</strong><br>
+
+            <kbd>←</kbd> Previous slide<br>
+
+            <kbd>→</kbd> Next slide<br>
+
+            <kbd>F11</kbd> Fullscreen<br>
+
+            <kbd>?</kbd> Toggle help<br>
+
+            <kbd>ESC</kbd> Exit fullscreen
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        let currentSlide = 0;
+
+        const slides = document.querySelectorAll('.slide');
+
+        const totalSlides = slides.length;
+
+
+
+        function showSlide(n) {
+
+            slides[currentSlide].classList.remove('active');
+
+            currentSlide = (n + totalSlides) % totalSlides;
+
+            slides[currentSlide].classList.add('active');
+
+            
+
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+
+        }
+
+
+
+        function changeSlide(direction) {
+
+            showSlide(currentSlide + direction);
+
+        }
+
+
+
+        // Keyboard navigation
+
+        document.addEventListener('keydown', (e) => {
+
+            if (e.key === 'ArrowLeft' && currentSlide > 0) {
+
+                changeSlide(-1);
+
+            } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+
+                changeSlide(1);
+
+            }
+
+        });
+
+
+
+        // Initialize
+
+        document.getElementById('prevBtn').disabled = true;
+
+        // Fullscreen functionality
+
+        function toggleFullscreen() {
+
+            if (!document.fullscreenElement) {
+
+                document.documentElement.requestFullscreen().then(() => {
+
+                    document.getElementById('presentationMode').classList.add('active');
+
+                });
+
+            } else {
+
+                document.exitFullscreen().then(() => {
+
+                    document.getElementById('presentationMode').classList.remove('active');
+
+                });
+
+            }
+
+        }
+
+        // Listen for fullscreen changes
+
+        document.addEventListener('fullscreenchange', () => {
+
+            const isFullscreen = !!document.fullscreenElement;
+
+            document.getElementById('presentationMode').classList.toggle('active', isFullscreen);
+
+        });
+
+        // Keyboard shortcuts help
+
+        let helpVisible = false;
+
+        document.addEventListener('keydown', (e) => {
+
+            if (e.key === '?' || e.key === '/') {
+
+                helpVisible = !helpVisible;
+
+                document.getElementById('shortcutsHelp').classList.toggle('active', helpVisible);
+
+                e.preventDefault();
+
+            }
+
+            if (e.key === 'Escape' && document.fullscreenElement) {
+
+                document.exitFullscreen();
+
+            }
+
+            // F11 for fullscreen
+
+            if (e.key === 'F11') {
+
+                e.preventDefault();
+
+                toggleFullscreen();
+
+            }
+
+        });
+
+        // Hide help when clicking outside
+
+        document.addEventListener('click', (e) => {
+
+            if (helpVisible && !e.target.closest('#shortcutsHelp')) {
+
+                helpVisible = false;
+
+                document.getElementById('shortcutsHelp').classList.remove('active');
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
+

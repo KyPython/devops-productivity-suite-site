@@ -5,6 +5,15 @@ import { validateString, validateRequired } from './utils/validator';
 import { AppError, ErrorCode } from './utils/error-handler';
 import { emailQueueService } from './services/email-queue';
 
+interface HubSpotContactResponse {
+  id: string;
+  properties?: Record<string, unknown>;
+}
+
+interface HubSpotSearchResponse {
+  results?: Array<{ id: string; properties?: Record<string, unknown> }>;
+}
+
 /**
  * Lead capture endpoint that submits to HubSpot and sends email
  */
@@ -126,7 +135,7 @@ async function submitToHubSpot(email: string, firstname: string): Promise<{ cont
       );
     }
 
-    const result = await response.json();
+    const result = await response.json() as HubSpotContactResponse;
     return { contactId: result.id || 'unknown' };
   } catch (error) {
     logger.error('HubSpot submission error', error as Error);
@@ -167,7 +176,7 @@ async function updateHubSpotContact(
       throw new Error('Failed to search for contact');
     }
 
-    const searchResult = await searchResponse.json();
+    const searchResult = await searchResponse.json() as HubSpotSearchResponse;
     const contactId = searchResult.results?.[0]?.id;
 
     if (!contactId) {

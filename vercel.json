@@ -4,6 +4,20 @@
     {
       "source": "/",
       "destination": "/landing.html"
+    },
+    {
+      "source": "/presentation",
+      "destination": "/presentation.html"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/process-email-queue",
+      "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/cron/business-automation",
+      "schedule": "0 9 * * *"
     }
   ]
 }
