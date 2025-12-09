@@ -100,10 +100,22 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
 
   // Helper function to escape HTML for use in srcdoc attribute (double-quoted)
   // Only escape quotes and ampersands that would break the attribute
+  // Clean up whitespace to ensure consistent rendering
   const escapeHtmlForSrcdoc = (str: string): string => {
     return str
+      // First escape HTML entities
       .replace(/&/g, '&amp;')
-      .replace(/"/g, '&quot;');
+      .replace(/"/g, '&quot;')
+      // Clean up whitespace: collapse multiple spaces/tabs to single space
+      .replace(/[ \t]+/g, ' ')
+      // Remove newlines that are just whitespace between tags
+      .replace(/>\s+</g, '><')
+      // Remove leading/trailing whitespace from each line
+      .split('\n')
+      .map(line => line.trim())
+      .join(' ')
+      // Final trim
+      .trim();
   };
 
   // If HTML format requested, return a preview page
@@ -363,7 +375,8 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
             <iframe 
               srcdoc="${escapeHtmlForSrcdoc(email.html)}" 
               style="height: 600px; width: 100%; border: none;"
-              onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px'"
+              sandbox="allow-same-origin"
+              onload="try { this.style.height = Math.max(600, this.contentWindow.document.body.scrollHeight + 20) + 'px'; } catch(e) {}"
             ></iframe>
           </div>
           <div class="email-actions">
