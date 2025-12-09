@@ -25,9 +25,18 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
   const expectedToken = process.env.PREVIEW_SECRET || 'preview-secret-change-me';
   
   if (!token || token !== expectedToken) {
+    // Provide helpful error message
+    const hasCustomSecret = !!process.env.PREVIEW_SECRET;
+    const message = hasCustomSecret
+      ? 'Invalid token. Check your Vercel environment variable PREVIEW_SECRET and use that token in the URL.'
+      : 'A valid token is required. Add ?token=preview-secret-change-me to the URL.';
+    
     res.status(401).json({ 
       error: 'Unauthorized',
-      message: 'A valid token is required. Add ?token=YOUR_SECRET to the URL.'
+      message,
+      hint: hasCustomSecret 
+        ? 'You have PREVIEW_SECRET set in Vercel. Use that token value, not the default.'
+        : 'Use the default token: preview-secret-change-me'
     });
     return;
   }

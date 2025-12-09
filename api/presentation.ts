@@ -13,6 +13,11 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
   const expectedToken = process.env.PREVIEW_SECRET || 'preview-secret-change-me';
   
   if (!token || token !== expectedToken) {
+    const hasCustomSecret = !!process.env.PREVIEW_SECRET;
+    const hint = hasCustomSecret
+      ? 'You have PREVIEW_SECRET set in Vercel. Use that token value, not the default.'
+      : 'Use the default token: preview-secret-change-me';
+    
     res.status(401).send(`
       <!DOCTYPE html>
       <html>
@@ -35,9 +40,18 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
             background: white;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
           }
           h1 { color: #d32f2f; margin-bottom: 10px; }
-          p { color: #666; }
+          p { color: #666; margin: 10px 0; }
+          .hint { 
+            background: #fff3cd; 
+            border: 1px solid #ffc107; 
+            border-radius: 4px; 
+            padding: 15px; 
+            margin-top: 20px;
+            color: #856404;
+          }
         </style>
       </head>
       <body>
@@ -45,6 +59,9 @@ export default withMonitoring(async (req: VercelRequest, res: VercelResponse) =>
           <h1>401 Unauthorized</h1>
           <p>A valid token is required to view this presentation.</p>
           <p>Add ?token=YOUR_SECRET to the URL.</p>
+          <div class="hint">
+            <strong>Hint:</strong> ${hint}
+          </div>
         </div>
       </body>
       </html>
