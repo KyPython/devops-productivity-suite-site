@@ -1,0 +1,18 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+.env
+.env.local
+.env.*.local
+*.swp
+*.swo
+*~
+.vercel
+
+# Business Materials (Private)
+BUSINESS_MATERIALS/
+
+# Snyk Security Extension - AI Rules (auto-generated)
+.cursor/rules/snyk_rules.mdc
