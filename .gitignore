@@ -1,27 +1,31 @@
-# Dependencies
+# Project Dependencies
 node_modules/
+
+# Build output
 dist/
 coverage/
 
-# Logs
+# Logs & Reports
 *.log
 
-# Environment variables
+# Environment Variables
+# Never commit secrets!
 .env
 .env.local
 .env.*.local
 
-# Vercel
+# Platform-specific
 .vercel
 .data/
 
-# Business Materials (Private)
+# Private Business Materials
 BUSINESS_MATERIALS/
 
-# Snyk Security Extension - AI Rules (auto-generated)
+# Auto-generated Tooling Files
 .cursor/rules/snyk_rules.mdc
 
-# Private/Sensitive Files
+# Private Keys & Sensitive Files
+# These patterns are intentionally broad to act as a safety net.
 *.pem
 *.key
 *.p12
@@ -37,19 +41,19 @@ BUSINESS_MATERIALS/
 *.tmp
 *.temp
 
-# IDE and Editor files
+# IDE & Editor Configuration
 .vscode/
 .idea/
 *.sublime-*
 *.code-workspace
 
-# OS files
+# OS-generated files
 .DS_Store
 Thumbs.db
 .AppleDouble
 .LSOverride
 
-# Temporary files
+# Temporary & Backup Files
 *.swp
 *.swo
 *~
