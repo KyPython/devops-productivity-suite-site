@@ -27,7 +27,10 @@
 - Environment verification tools (check required dev tools are installed)
 - Deployment automation scripts
 - POSIX shell scripts for maximum portability (macOS, Linux, Windows WSL)
-- **Note:** Port configuration improvements planned (see [Port Configuration Improvements](./PORT_CONFIGURATION_IMPROVEMENTS.md))
+- **Port Configuration System** - Centralized port management (no hardcoded ports)
+- **Migration Tool** - Automatically migrate existing projects from hardcoded ports
+- **Template System** - Generate consistent dev scripts (start-dev.sh, stop-dev.sh, health-check.sh)
+- **Dependency Detection** - Auto-detect and install missing dependencies (npm, yarn, pnpm, pip, poetry, cargo, go)
 
 **Value:**
 - Eliminates repetitive typing
