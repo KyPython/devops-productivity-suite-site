@@ -83,6 +83,34 @@
 
 ---
 
+**Productivity Features (New):**
+
+#### Port Configuration System
+- **`port-config.sh`** - Centralized port management
+- **`port-validation.sh`** - Port conflict detection
+- **`.devops/ports.conf`** - Port configuration file
+- Eliminates hardcoded ports in scripts
+
+#### Migration Tool
+- **`migrate-ports.sh`** - Automatically migrate existing projects
+- Scans for hardcoded ports
+- Extracts to configuration
+- Updates scripts to use variables
+
+#### Template System
+- **`generate-scripts.sh`** - Generate dev scripts from templates
+- Templates: `start-dev.sh`, `stop-dev.sh`, `health-check.sh`
+- All use port configuration system
+- Consistent script generation
+
+#### Dependency Detection
+- **`dependency-detection.sh`** - Auto-detect package managers
+- Supports: npm, yarn, pnpm, pip, poetry, cargo, go
+- Auto-install missing dependencies
+- Monorepo support
+
+---
+
 #### 3. `simple-deploy.sh`
 **Purpose:** Simulate deployment workflows
 
