@@ -57,4 +57,11 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfplan
 *.orig

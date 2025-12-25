@@ -15,7 +15,7 @@
 
 ---
 
-## **What's Included: 5 Production-Ready DevOps Tools**
+## **What's Included: 6 Production-Ready DevOps Tools**
 
 ### **1. Shell Games Toolkit** 🔧
 **Automation Scripts for Common Development Tasks**
@@ -150,6 +150,38 @@
 
 ---
 
+### **6. Infrastructure as Code (Terraform)** ☁️
+**Cloud Infrastructure Provisioning & Management**
+
+**Repository:** Infrastructure templates and standards included in package
+
+**What it does:**
+- Declarative infrastructure definition (define *what* you need, not *how* to build it)
+- Version-controlled infrastructure (servers, databases, networks as code)
+- Automated provisioning and updates via `terraform plan` and `terraform apply`
+- Drift detection to prevent unauthorized manual changes
+- Environment replication (staging matches production exactly)
+- Disaster recovery automation (redeploy entire infrastructure in minutes)
+- State management for infrastructure tracking
+
+**Value:**
+- Eliminates "ClickOps" and manual console configuration
+- Ensures infrastructure consistency across environments
+- Provides audit trail for all infrastructure changes
+- Enables rapid disaster recovery
+- Prevents configuration drift and human error
+- Treats infrastructure like application code (version control, PR reviews)
+
+**Setup includes:**
+- Custom Terraform modules for your cloud provider (AWS, Azure, GCP)
+- Infrastructure templates for common architectures
+- Remote state configuration (S3, Azure Storage, GCS)
+- CI/CD integration for infrastructure changes
+- Team training on Terraform best practices
+- Infrastructure standards documentation
+
+---
+
 ## **Package Benefits**
 
 ### **Quantified ROI (Based on Market Research):**
@@ -178,7 +210,7 @@
 ## **What You Get**
 
 ### **One-Time Setup ($997):**
-1. **Custom Configuration** - All 5 tools tailored to your tech stack
+1. **Custom Configuration** - All 6 tools tailored to your tech stack
 2. **Team Integration** - Setup in your repos, CI/CD, and workflows
 3. **Documentation** - Complete guides for each tool
 4. **Team Training** - 2-hour onboarding session
@@ -203,6 +235,8 @@
 - **Node.js/TypeScript** - For code generation and automation tools
 - **Shell access** - For automation scripts (macOS, Linux, or WSL)
 - **CI/CD platform** - GitHub Actions (or we can adapt to your platform)
+- **Terraform** - For infrastructure as code (we'll help with installation)
+- **Cloud Provider Account** - AWS, Azure, or GCP (for infrastructure provisioning)
 
 ---
 
@@ -234,7 +268,10 @@ All tools are accessible via simple npm commands. Add these to your `package.jso
     "gen:route": "./scripts/code-generator.sh route",
     "quality:check": "./scripts/code-quality-check.sh",
     "git:status": "./scripts/git-workflow-helper.sh status",
-    "git:pr": "./scripts/git-workflow-helper.sh pr"
+    "git:pr": "./scripts/git-workflow-helper.sh pr",
+    "infra:init": "terraform init",
+    "infra:plan": "terraform plan",
+    "infra:apply": "terraform apply"
   }
 }
 ```
@@ -266,7 +303,7 @@ All scripts work seamlessly in GitHub Actions and other CI environments:
 - ✅ Multi-service detection works out of the box
 - ✅ CI/CD integration requires zero configuration
 
-**Recent Improvements:** Port configuration system, migration tool, template system, and dependency detection have been implemented and are production-ready.
+**Recent Improvements:** Port configuration system, migration tool, template system, dependency detection, and Infrastructure as Code (Terraform) have been implemented and are production-ready.
 
 ---
 
@@ -286,6 +323,7 @@ All scripts work seamlessly in GitHub Actions and other CI environments:
 - **Git Workflows Sample:** https://github.com/KyPython/git-workflows-sample
 - **Code Generator Tool:** https://github.com/KyPython/code-generator-tool
 - **Software Entropy:** https://github.com/KyPython/software-entropy
+- **Infrastructure as Code:** Terraform templates and standards included in package setup
 
 ---
 
