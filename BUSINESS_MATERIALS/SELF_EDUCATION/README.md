@@ -98,7 +98,7 @@ Before you're ready to sell, you should be able to:
 - [ ] Explain each tool in 30 seconds without notes
 - [ ] Calculate ROI for any team size instantly
 - [ ] Handle the 5 most common objections confidently
-- [ ] Demo all 5 tools without looking at documentation
+- [ ] Demo all 6 tools without looking at documentation
 - [ ] Explain how tools integrate together
 - [ ] Answer technical questions about implementation
 - [ ] Customize the pitch for different team sizes
@@ -124,7 +124,7 @@ Before you're ready to sell, you should be able to:
 
 **This Month:**
 1. Complete all 3 weeks of study
-2. Master all 5 tools
+2. Master all 6 tools
 3. Practice sales conversations
 4. Start marketing execution
 
@@ -143,6 +143,7 @@ Before you're ready to sell, you should be able to:
 ---
 
 **Let's get you ready to sell with confidence! 🎯**
+
 
 
 

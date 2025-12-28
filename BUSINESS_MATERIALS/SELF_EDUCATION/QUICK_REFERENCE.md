@@ -4,22 +4,25 @@
 
 ---
 
-## 🎯 The 5 Tools (30-Second Explanations)
+## 🎯 The 6 Tools (30-Second Explanations)
 
 ### 1. Shell Games Toolkit
-"POSIX shell scripts that automate project setup, environment checks, and deployments. Works everywhere - macOS, Linux, Windows WSL. Saves 30 minutes per project setup. Use `npm run check-env` to verify your environment."
+"Eliminates $3,000/dev/year 'works on my machine' costs. POSIX shell scripts that work everywhere—macOS, Linux, Windows WSL. 78% faster onboarding (4 days → <1 day). Use `npm run check-env` to verify your environment."
 
 ### 2. Ubiquitous Automation
-"CI/CD automation with GitHub Actions, pre-commit hooks, and multi-layer testing. Every push is automatically tested and validated. Prevents broken code from reaching production. Use `npm run test:all` to run all tests."
+"Full CI/CD pipeline automation. 30% higher deployment frequency, 40% lower change failure rate. Tests, linting, and builds run automatically on every push. Prevents broken code from reaching production. Use `npm run test:all` to run all tests."
 
 ### 3. Git Workflows Sample
-"Standardized branching strategies, PR templates, and code review processes. Eliminates 80% of merge conflicts. Ensures consistent collaboration across your team. Use `npm run git:pr` to prepare for pull requests."
+"Standardize your branching strategy and PR process. Reduce merge conflicts and speed up code reviews. PR templates and code review processes. Ensures consistent collaboration across your team. Use `npm run git:pr` to prepare for pull requests."
 
 ### 4. Code Generator Tool
-"Template-based boilerplate generation. Instead of copying code, generate it from templates. Ensures consistency and eliminates errors. Saves 2+ hours/week on boilerplate. Use `npm run gen:component Button` to generate components."
+"Generate boilerplate code from templates. Spend less time on repetitive patterns, more on features. Ensures consistency and eliminates errors. Saves 2+ hours/week on boilerplate. Use `npm run gen:component Button` to generate components."
 
 ### 5. Software Entropy
-"Code quality scanner that detects technical debt. Identifies code smells like long functions, large files, TODO density. Makes invisible debt visible so you can prioritize fixes. Use `npm run quality:check` to scan your code."
+"Makes invisible technical debt visible. Prevents 3-day features from becoming 3-week slogs. Identifies code smells like long functions, large files, TODO density. Identify code smells before they become problems. Use `npm run quality:check` to scan your code."
+
+### 6. Infrastructure as Code (Terraform)
+"Eliminate 'ClickOps' and ensure infrastructure consistency. Declarative infrastructure definition, version-controlled servers and databases, automated provisioning. Staging matches production exactly. Disaster recovery in minutes. Use `npm run infra:plan` to review infrastructure changes."
 
 ---
 
@@ -34,7 +37,11 @@ All tools are accessible via npm scripts. Add these to your `package.json`:
     "test:all": "./scripts/test-all.sh",
     "git:pr": "git-workflow pr",
     "gen:component": "gen generate component",
-    "quality:check": "software-entropy ."
+    "quality:check": "software-entropy .",
+    "infra:plan": "terraform plan",
+    "infra:apply": "terraform apply",
+    "infra:format": "terraform fmt -recursive",
+    "infra:validate": "terraform validate"
   }
 }
 ```
@@ -45,6 +52,8 @@ All tools are accessible via npm scripts. Add these to your `package.json`:
 - `npm run git:pr` - Prepare for PR (runs all checks)
 - `npm run gen:component MyComponent` - Generate component
 - `npm run quality:check` - Run code quality scan
+- `npm run infra:plan` - Review infrastructure changes
+- `npm run infra:apply` - Apply infrastructure changes
 
 **CI/CD Mode:**
 All scripts work automatically in CI when `CI=true` is set. See `.github/workflows/example.yml` in each repository.
@@ -63,9 +72,10 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 
 **Example (5-person team):**
 - Productivity: 5 × $3,000 = $15,000/year saved
-- Time: 5 × 5 hours/week × 52 × $100 = $130,000/year
+- Time: 5 × 5+ hours/week × 52 × $100 = $130,000+/year
 - Cost: $997 + ($199 × 12) = $3,385/year
 - **ROI: 443% (productivity) or 3,840% (time)**
+- **Payback Period: 3 months**
 
 **Quick Reference:**
 - 3-person team: $9,000/year productivity, $78,000/year time, **266% or 2,300% ROI**
@@ -96,9 +106,9 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 
 ## 📊 Value Proposition (30 Seconds)
 
-**Problem:** 58% of developers waste 5+ hours/week on "works on my machine" issues, costing $3,000/developer/year. Growing teams (5-10 devs) hit a "breakpoint" where process chaos kills velocity.
+**Problem:** 58% of developers waste 5+ hours/week on "works on my machine" issues, costing $3,000/developer/year. Teams of 5-10 developers hit a "breakpoint" where process chaos kills velocity. Process chaos as team grows from 5 to 10 developers. Technical debt slowing 3-day features into 3-week slogs.
 
-**Solution:** Out-of-the-Box Internal Developer Platform (IDP) for teams too small to build their own. 5 production-ready tools that eliminate environment issues, standardize workflows, and make technical debt visible.
+**Solution:** Out-of-the-Box Internal Developer Platform for teams too small to build their own. 6 production-ready tools that eliminate environment issues, standardize workflows, make technical debt visible, and ensure infrastructure consistency.
 
 **Investment:** $997 setup + $199/month (or $15-20/user/month SaaS)
 
@@ -106,7 +116,7 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 
 **Timeline:** <1 week setup, ROI immediately, payback in 3 months
 
-**Target:** 5-10 developer "breakpoint teams" experiencing process chaos
+**Target:** Teams of 5-10 developers (the "breakpoint" where process chaos kills velocity), SMB development teams (3-20 engineers)
 
 **Risk:** Minimal - tools are proven, <1 week setup, see value Day 1
 
@@ -149,6 +159,13 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 - **Value:** Prevents technical debt accumulation
 - **NPM Script:** `npm run quality:check`
 
+### Infrastructure as Code (Terraform)
+- **Language:** HCL (HashiCorp Configuration Language)
+- **Providers:** AWS, Azure, GCP (customizable)
+- **Setup Time:** 4 hours
+- **Value:** Eliminates "ClickOps", ensures infrastructure consistency
+- **NPM Script:** `npm run infra:plan`, `npm run infra:apply`
+
 ---
 
 ## 🎯 Demo Flow (Quick Version)
@@ -158,6 +175,7 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 3. **Git Workflows:** "Standardized branching and PR process" [Show PR template]
 4. **Ubiquitous Automation:** "Automatic testing on every push" [Show GitHub Actions]
 5. **Software Entropy:** "Code quality monitoring" [Run scan]
+6. **Infrastructure as Code:** "Infrastructure version-controlled like code" [Show Terraform plan]
 
 **Closing:** "Together, these tools form a complete DevOps ecosystem—an Out-of-the-Box IDP for teams too small to build their own. Setup takes <1 week. ROI immediately, payback in 3 months."
 
@@ -198,7 +216,7 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 **First Year:** $3,385 total ($997 + $199 × 12)
 
 **What's Included:**
-- Custom configuration for all 5 tools
+- Custom configuration for all 6 tools
 - Team integration (repos, CI/CD, workflows)
 - Complete documentation
 - 2-hour team training
@@ -248,6 +266,7 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 **ROI:**
 - "ROI immediately, payback in 3 months"
 - "443% ROI (productivity) or 3,840% ROI (time) for a 5-person team"
+- "Payback Period: 3 months"
 - "Save $3,000 per developer per year"
 - "Reclaim 5+ hours per week per developer"
 
@@ -266,7 +285,7 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 - Explain any tool in 30 seconds
 - Calculate ROI instantly
 - Handle any objection
-- Demo all 5 tools
+- Demo all 6 tools
 - Customize the pitch
 
 **You're Ready:**
@@ -278,6 +297,7 @@ All scripts work automatically in CI when `CI=true` is set. See `.github/workflo
 ---
 
 **Print this. Keep it handy. Reference during calls. You've got this! 💪**
+
 
 
 

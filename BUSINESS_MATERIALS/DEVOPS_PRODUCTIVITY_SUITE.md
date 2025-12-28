@@ -4,36 +4,42 @@
 
 **Price:** $997 one-time setup + $199/month (teams up to 20 developers)  
 **Alternative:** $15-20/user/month SaaS model  
-**Target:** SMB development teams (3-20 engineers), CTOs, Engineering Leads  
+**Target:** Teams of 5-10 developers (the "breakpoint" where process chaos kills velocity), SMB development teams (3-20 engineers), CTOs, Engineering Leads  
 **Delivery:** <1 week setup + ongoing monthly support
 
 **Market Validation:** 
 - $72.81B DevOps automation market by 2032 (26% CAGR)
-- 58% of developers waste 5+ hours/week on environment issues
+- 58% of developers waste 5+ hours/week on "works on my machine" issues
+- $3,000/dev/year lost to environment inconsistencies
+- 5+ hours/week wasted on unproductive troubleshooting
+- 4 days to onboard new developers (should be <1 day)
+- Process chaos as team grows from 5 to 10 developers
+- Technical debt slowing 3-day features into 3-week slogs
 - ROI: Save $3,000/developer/year in lost productivity
 - Reduce onboarding from 4 days to <1 day (78% faster)
 
 ---
 
-## **What's Included: 6 Production-Ready DevOps Tools**
+## **What's Included: 6 Production-Ready Tools. One Complete Suite.**
 
 ### **1. Shell Games Toolkit** 🔧
-**Automation Scripts for Common Development Tasks**
+**Eliminates $3,000/dev/year "works on my machine" costs**
 
 **Repository:** https://github.com/KyPython/shell-games
 
 **What it does:**
+- POSIX shell scripts that work everywhere—macOS, Linux, Windows WSL
 - Project scaffolding scripts (Node.js/TypeScript projects with sensible defaults)
 - Environment verification tools (check required dev tools are installed)
 - Deployment automation scripts
-- POSIX shell scripts for maximum portability (macOS, Linux, Windows WSL)
 - **Port Configuration System** - Centralized port management (no hardcoded ports)
 - **Migration Tool** - Automatically migrate existing projects from hardcoded ports
 - **Template System** - Generate consistent dev scripts (start-dev.sh, stop-dev.sh, health-check.sh)
 - **Dependency Detection** - Auto-detect and install missing dependencies (npm, yarn, pnpm, pip, poetry, cargo, go)
 
 **Value:**
-- Eliminates repetitive typing
+- Eliminates $3,000/dev/year "works on my machine" costs
+- 78% faster onboarding (4 days → <1 day)
 - Ensures consistency across team
 - Catches issues early
 - Standardizes processes
@@ -46,11 +52,12 @@
 ---
 
 ### **2. Ubiquitous Automation** ⚙️
-**CI/CD Pipeline Automation**
+**Full CI/CD pipeline automation**
 
 **Repository:** https://github.com/KyPython/ubiquitous-automation
 
 **What it does:**
+- Full CI/CD pipeline automation
 - Automated test execution (local, pre-commit, CI)
 - Code quality checks (linting, formatting)
 - Build automation (compilation, artifact generation)
@@ -58,10 +65,11 @@
 - Single-command execution for complex workflows
 
 **Value:**
+- 30% higher deployment frequency
+- 40% lower change failure rate
+- Tests, linting, and builds run automatically on every push
 - Eliminates human error in repetitive tasks
 - Fast feedback on code quality
-- Automated testing at multiple levels
-- Fail-fast error detection
 
 **Setup includes:**
 - Custom GitHub Actions workflows for your repos
@@ -72,11 +80,12 @@
 ---
 
 ### **3. Git Workflows Sample** 📝
-**Source Control Best Practices & Branching Strategies**
+**Standardize your branching strategy and PR process**
 
 **Repository:** https://github.com/KyPython/git-workflows-sample
 
 **What it does:**
+- Standardize your branching strategy and PR process
 - Implements branching model (main, develop, feature/*)
 - Comprehensive Git command documentation
 - Pull request workflow templates
@@ -84,6 +93,7 @@
 - Branching strategy documentation
 
 **Value:**
+- Reduce merge conflicts and speed up code reviews
 - Enables safe collaboration
 - Maintains code quality
 - Supports safe experimentation through branching
@@ -98,11 +108,12 @@
 ---
 
 ### **4. Code Generator Tool** 🏗️
-**Boilerplate Code Generation from Templates**
+**Generate boilerplate code from templates**
 
 **Repository:** https://github.com/KyPython/code-generator-tool
 
 **What it does:**
+- Generate boilerplate code from templates
 - Generates boilerplate code from reusable templates
 - Eliminates repetitive code patterns
 - Template placeholders for dynamic generation
@@ -110,6 +121,7 @@
 - Extensible template system
 
 **Value:**
+- Spend less time on repetitive patterns, more on features
 - Reduces manual coding errors
 - Maintains consistency across codebase
 - Saves time on common patterns
@@ -124,34 +136,38 @@
 ---
 
 ### **5. Software Entropy** 🔍
-**Code Quality Scanner & Technical Debt Detector**
+**Hotspot-first code quality & security analysis (competitive alternative to SonarQube)**
 
 **Repository:** https://github.com/KyPython/software-entropy
 
 **What it does:**
-- Scans code repositories for code smells
-- Detects long functions, large files, TODO/FIXME density
-- Pluggable rule system for easy extension
-- Multiple output formats (JSON, pretty console)
-- Configurable thresholds
-- Efficient scanning with customizable file patterns
+- **Hotspot-First Prioritization**: Identifies files that are both complex AND frequently changed (the intersection of complexity × churn)
+- **18 Comprehensive Rules**: 11 code quality + 7 security rules
+- **OWASP Top 10 Coverage**: SQL injection, XSS, CSRF, authentication flaws, path traversal, command injection, hardcoded secrets
+- **AST-Based Analysis**: TypeScript/JavaScript + Python AST parsing for deeper analysis
+- **Dependency Scanning**: CVE database integration via OSV API
+- **Multiple Output Formats**: JSON, HTML, Prometheus metrics, pretty console
+- **Performance Optimized**: Parallel processing, incremental scanning, AST caching
+- **CI/CD Native**: GitHub Actions annotations, proper exit codes
+- **Baseline Comparison**: Track improvements over time
 
 **Value:**
-- Identifies technical debt early
-- Provides actionable code quality insights
-- Fast scanning for immediate feedback
-- Well-tested with comprehensive test suite
+- **Prevents 3-day features from becoming 3-week slogs** - Identifies technical debt hotspots before they become problems
+- **Actionable Prioritization** - Shows "10 hotspots to fix" instead of "50,000 issues" (addresses SonarQube alert fatigue)
+- **Security Coverage** - OWASP Top 10 security vulnerability detection
+- **Fast Feedback** - Incremental scanning provides immediate feedback on changed files
+- **Competitive Alternative** - Hotspot-first approach differentiates from SonarQube's comprehensive but overwhelming coverage
 
 **Setup includes:**
 - Custom rules configuration for your standards
-- Integration with CI/CD pipeline
-- Automated reporting dashboard
-- Team training on code quality standards
+- Integration with CI/CD pipeline (GitHub Actions, pre-commit hooks)
+- Automated reporting (JSON, HTML, Prometheus)
+- Team training on code quality standards and hotspot prioritization
 
 ---
 
 ### **6. Infrastructure as Code (Terraform)** ☁️
-**Cloud Infrastructure Provisioning & Management**
+**Eliminate "ClickOps" and ensure infrastructure consistency**
 
 **Repository:** Infrastructure templates and standards included in package
 
@@ -159,6 +175,8 @@
 - Declarative infrastructure definition (define *what* you need, not *how* to build it)
 - Version-controlled infrastructure (servers, databases, networks as code)
 - Automated provisioning and updates via `terraform plan` and `terraform apply`
+- **Auto-formatting on commit** - Terraform files automatically formatted and staged before commits
+- **Pre-commit validation** - Syntax validation prevents invalid Terraform from being committed
 - Drift detection to prevent unauthorized manual changes
 - Environment replication (staging matches production exactly)
 - Disaster recovery automation (redeploy entire infrastructure in minutes)
@@ -176,6 +194,7 @@
 - Custom Terraform modules for your cloud provider (AWS, Azure, GCP)
 - Infrastructure templates for common architectures
 - Remote state configuration (S3, Azure Storage, GCS)
+- **Pre-commit hooks** - Automatic formatting and validation of Terraform files
 - CI/CD integration for infrastructure changes
 - Team training on Terraform best practices
 - Infrastructure standards documentation
@@ -190,6 +209,8 @@
 - 🚀 **78% faster onboarding** - New hires productive in <1 day instead of 4 days
 - 📈 **30% higher deployment frequency** - Automated CI/CD workflows
 - 🛡️ **40% lower change failure rate** - Early error detection and code quality enforcement
+- 📊 **ROI: 443% (productivity) or 3,840% (time)** for a 5-person team
+- ⏰ **Payback Period: 3 months**
 
 ### **Immediate Impact:**
 - ✅ **Automated workflows** - Eliminate manual repetitive tasks
@@ -199,8 +220,10 @@
 - ✅ **Code quality** - Automated scanning and enforcement
 
 ### **Long-Term Value:**
-- ✅ **Reduced technical debt** - Avoid $6.9M/year cost for 500-person orgs
-- ✅ **Team velocity** - Prevent 3-day features from becoming 3-week slogs
+- ✅ **Out-of-the-Box IDP** - Internal Developer Platform for teams too small to build their own
+- ✅ **Reduced technical debt** - Software Entropy's hotspot-first approach prevents 3-day features from becoming 3-week slogs
+- ✅ **Competitive code quality** - 18 rules (11 quality + 7 security) with OWASP Top 10 coverage, competitive with SonarQube
+- ✅ **Team velocity** - Maintain velocity as team grows from 5 to 10 developers (the "breakpoint")
 - ✅ **Scalable processes** - Maintain velocity as team grows from 5 to 20
 - ✅ **Best practices** - Industry-standard DevOps workflows
 - ✅ **Ongoing support** - Monthly updates and improvements
@@ -215,7 +238,6 @@
 3. **Documentation** - Complete guides for each tool
 4. **Team Training** - 2-hour onboarding session
 5. **Source Code Access** - Full access to all tool repositories
-6. **ROI Dashboard** - Track time saved and productivity gains
 
 ### **Monthly Support ($199/month for up to 20 devs):**
 1. **Tool Updates** - New features and improvements
@@ -271,7 +293,9 @@ All tools are accessible via simple npm commands. Add these to your `package.jso
     "git:pr": "./scripts/git-workflow-helper.sh pr",
     "infra:init": "terraform init",
     "infra:plan": "terraform plan",
-    "infra:apply": "terraform apply"
+    "infra:apply": "terraform apply",
+    "infra:format": "terraform fmt -recursive",
+    "infra:validate": "terraform validate"
   }
 }
 ```

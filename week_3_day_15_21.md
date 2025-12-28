@@ -14,7 +14,6 @@
 - **Day 5:** Git Workflows Sample
 - **Day 6:** Code Generator Tool
 - **Day 7:** Software Entropy
-- **Day 8:** Infrastructure as Code (Terraform)
 
 ### Week 2: Integration & Use Cases
 - **Day 8-9:** How tools work together
@@ -42,11 +41,11 @@
 - [ ] Can answer: "What if we use Python instead of Node.js?"
 
 **Key Talking Points:**
-- "Eliminates $3,000/dev/year 'works on my machine' costs"
-- "POSIX shell scripts that work everywhere—macOS, Linux, Windows WSL"
-- "78% faster onboarding (4 days → <1 day)"
+- "POSIX shell means it works everywhere - macOS, Linux, even Windows with WSL"
 - "Instead of typing the same commands every time, one script does it all"
+- "Eliminates $3,000 per developer per year in 'works on my machine' costs"
 - "New developers can't miss steps because the script enforces the process"
+- "78% faster onboarding - productive in <1 day instead of 4 days"
 - "We customize these scripts to match your exact tech stack"
 
 **Common Questions & Answers:**
@@ -72,9 +71,7 @@
 - [ ] Can answer: "What if we use GitLab/Jenkins instead of GitHub Actions?"
 
 **Key Talking Points:**
-- "Full CI/CD pipeline automation"
-- "30% higher deployment frequency, 40% lower change failure rate"
-- "Tests, linting, and builds run automatically on every push"
+- "Every push automatically runs tests, linting, and builds - catches errors before they reach production"
 - "Pre-commit hooks catch issues before you even commit - saves time"
 - "Fail-fast means problems stop the pipeline immediately - no broken code in production"
 - "We adapt this to your CI/CD platform - GitHub Actions, GitLab CI, Jenkins, CircleCI, whatever you use"
@@ -101,8 +98,7 @@
 - [ ] Can answer: "What if we use a different branching model?"
 
 **Key Talking Points:**
-- "Standardize your branching strategy and PR process"
-- "Reduce merge conflicts and speed up code reviews"
+- "Proper Git workflows prevent merge conflicts and broken code"
 - "PR templates ensure reviewers have all the context they need"
 - "Feature branches let developers experiment safely without breaking main"
 - "We customize the branching strategy to match your team's needs - GitFlow, GitHub Flow, or your own model"
@@ -129,8 +125,7 @@
 - [ ] Can answer: "What templates do you provide?"
 
 **Key Talking Points:**
-- "Generate boilerplate code from templates"
-- "Spend less time on repetitive patterns, more on features"
+- "Instead of copying and pasting code, generate it from templates"
 - "Templates ensure consistency - every module follows the same structure"
 - "Overwrite protection prevents accidental code loss"
 - "We create custom templates for your specific patterns - React components, API routes, database models, whatever you need"
@@ -157,9 +152,7 @@
 - [ ] Can answer: "What if we have different code quality standards?"
 
 **Key Talking Points:**
-- "Makes invisible technical debt visible"
-- "Prevents 3-day features from becoming 3-week slogs"
-- "Identify code smells before they become problems"
+- "Technical debt accumulates silently. This tool makes it visible"
 - "Code smells are warning signs - long functions, large files, too many TODOs"
 - "Configurable thresholds mean you set your own standards"
 - "We integrate it into your CI/CD pipeline - fails builds if quality drops below your threshold"
@@ -176,38 +169,6 @@
 
 ---
 
-### ✅ Tool 6: Infrastructure as Code (Terraform)
-- [ ] Understand what Infrastructure as Code means
-- [ ] Know the difference between declarative and imperative
-- [ ] Understand Terraform state management
-- [ ] Know what "drift detection" means
-- [ ] Can explain the value: eliminates "ClickOps", ensures consistency
-- [ ] Understand how infrastructure is version-controlled
-- [ ] Can answer: "What if we use CloudFormation/Pulumi instead of Terraform?"
-
-**Key Talking Points:**
-- "Eliminate 'ClickOps' and ensure infrastructure consistency"
-- "Infrastructure as code means servers, databases, and networks are version-controlled like application code"
-- "Staging matches production exactly - no more 'works in staging, breaks in production'"
-- "Disaster recovery in minutes - redeploy entire infrastructure from code"
-- "Pre-commit hooks automatically format and validate Terraform files"
-- "We adapt this to your cloud provider - AWS, Azure, GCP, whatever you use"
-
-**Common Questions & Answers:**
-- **Q: "What if we use CloudFormation/Pulumi instead of Terraform?"**  
-  A: "The principles are the same. We can adapt to your IaC tool of choice. Terraform is what we provide, but the concepts apply to any infrastructure-as-code tool."
-
-- **Q: "What if someone manually changes infrastructure in the console?"**  
-  A: "Terraform detects 'drift' - when actual infrastructure differs from code. The next `terraform apply` will show the difference and can restore it to match the code. We also set up alerts for unauthorized changes."
-
-- **Q: "How do we handle secrets in Terraform?"**  
-  A: "We use Terraform variables and secrets management (AWS Secrets Manager, Azure Key Vault, etc.). Secrets are never hardcoded in Terraform files."
-
-- **Q: "What if we lose the Terraform state file?"**  
-  A: "We configure remote state storage (S3, Azure Storage, GCS) so state is backed up and shared. We also document disaster recovery procedures."
-
----
-
 ## 🔗 Integration Mastery
 
 ### How the Tools Work Together
@@ -218,14 +179,12 @@
 3. **Git Workflows** → Manages code changes safely
 4. **Ubiquitous Automation** → Tests and validates automatically
 5. **Software Entropy** → Monitors code quality continuously
-6. **Infrastructure as Code** → Provisions and manages infrastructure consistently
 
 **Value Chain:**
 - **Setup:** Shell Games + Code Generator = Fast project initialization
 - **Development:** Git Workflows + Code Generator = Consistent code structure
 - **Quality:** Ubiquitous Automation + Software Entropy = Continuous quality monitoring
 - **Deployment:** Ubiquitous Automation = Automated, reliable deployments
-- **Infrastructure:** Infrastructure as Code = Consistent, version-controlled infrastructure
 
 **Talking Point:**
 "These tools form a complete DevOps ecosystem. From project setup to deployment, everything is automated and standardized. Your team spends less time on process and more time building features."
@@ -242,7 +201,6 @@ npm run test:all           # Ubiquitous Automation
 npm run git:pr             # Git Workflows
 npm run gen:component      # Code Generator
 npm run quality:check      # Software Entropy
-npm run infra:plan         # Infrastructure as Code
 ```
 
 **2. CI/CD Ready:**
@@ -264,7 +222,7 @@ Each tool includes `.github/workflows/example.yml` showing:
 - Multi-job workflows
 
 **Talking Point:**
-"All 6 tools integrate seamlessly. You can run `npm run check-env` to verify your environment, `npm run quality:check` to scan code quality, `npm run git:pr` to prepare for pull requests, and `npm run infra:plan` to review infrastructure changes. Everything works in CI/CD automatically—just set `CI=true` and you're done."
+"All 5 tools integrate seamlessly. You can run `npm run check-env` to verify your environment, `npm run quality:check` to scan code quality, and `npm run git:pr` to prepare for pull requests. Everything works in CI/CD automatically—just set `CI=true` and you're done."
 
 ---
 
@@ -289,9 +247,8 @@ Each tool includes `.github/workflows/example.yml` showing:
 
 ### Scenario 2: "We're scaling from 5 to 15 developers" (The Breakpoint)
 **Pain Points:**
-- Teams of 5-10 developers hit a "breakpoint" where process chaos kills velocity
 - Onboarding new developers is slow (takes 4 days, should be <1 day)
-- Processes break down as team grows from 5 to 10 developers
+- Processes break down as team grows
 - Code quality inconsistent across team
 - Hitting the "breakpoint" where velocity decreases as team doubles
 
@@ -302,7 +259,7 @@ Each tool includes `.github/workflows/example.yml` showing:
 - Shell Games: 78% faster onboarding (4 days → <1 day)
 
 **ROI Pitch:**
-"Teams of 5-10 developers hit a 'breakpoint' where process chaos kills velocity. These tools ensure everyone follows the same workflow. New developers are productive in <1 day instead of 4 days—that's 78% faster onboarding. For a team scaling from 5 to 15, that's massive ROI."
+"Scaling teams hit a breakpoint at 5-10 developers where process chaos kills velocity. These tools ensure everyone follows the same workflow. New developers are productive in <1 day instead of 4 days—that's 78% faster onboarding. For a team scaling from 5 to 15, that's massive ROI."
 
 ---
 
@@ -318,7 +275,7 @@ Each tool includes `.github/workflows/example.yml` showing:
 - Code Generator: Ensures new code follows standards
 
 **ROI Pitch:**
-"Technical debt is invisible until it's too late. Software Entropy makes it visible. Prevents 3-day features from becoming 3-week slogs. You can see exactly where the problems are and prioritize fixes. Plus, new code follows standards, so debt doesn't accumulate."
+"Technical debt is invisible until it's too late. Software Entropy makes it visible. You can see exactly where the problems are and prioritize fixes. Plus, new code follows standards, so debt doesn't accumulate."
 
 ---
 
@@ -335,7 +292,7 @@ Each tool includes `.github/workflows/example.yml` showing:
 - Git Workflows: Safe deployment process
 
 **ROI Pitch:**
-"Modern DevOps means automation. Manual deployments are risky and slow. With Ubiquitous Automation, every push is tested and deployed automatically—30% higher deployment frequency, 40% lower change failure rate. This is your Out-of-the-Box Internal Developer Platform for teams too small to build their own."
+"Modern DevOps means automation. Manual deployments are risky and slow. With Ubiquitous Automation, every push is tested and deployed automatically—30% higher deployment frequency, 40% lower failure rate. This is your Out-of-the-Box IDP for teams too small to build their own."
 
 ---
 
@@ -348,16 +305,12 @@ Each tool includes `.github/workflows/example.yml` showing:
 **Follow-up:**
 "Let's start with one tool - Shell Games. It takes 2 hours to set up and saves 1-2 hours per developer per week. You'll see ROI in the first week. Plus, we can have you up and running in <1 week total."
 
----
-
 ### Objection 2: "We already have some of this"
 **Response:**
 "Great! That means you understand the value. We're not replacing what works - we're completing it. Most teams have pieces but not the full system. We fill the gaps."
 
 **Follow-up:**
 "Let's audit what you have. We'll identify gaps and show you how these tools complete your workflow."
-
----
 
 ### Objection 3: "Our team won't adopt it"
 **Response:**
@@ -366,16 +319,12 @@ Each tool includes `.github/workflows/example.yml` showing:
 **Follow-up:**
 "Start with one tool. Once the team sees the value, they'll want more. We've seen this pattern before - resistance turns into enthusiasm once they see the time savings."
 
----
-
 ### Objection 4: "It's too expensive"
 **Response:**
-"Let's do the math. If you have 5 developers, each saves $3,000/year from eliminating 'works on my machine' issues. That's $15,000/year saved. The package costs $3,385/year ($997 setup + $199/month × 12). That's a 443% ROI (productivity) or 3,840% ROI (time) - it pays for itself in 3 months."
+"Let's do the math. If you have 5 developers, each saves $3,000/year from eliminating 'works on my machine' issues. That's $15,000/year saved. The package costs $3,385 for the first year ($997 one-time setup + $199/month × 12). That's a 443% ROI - it pays for itself in 3 months."
 
 **Follow-up:**
-"Plus, you're reclaiming 5+ hours per week per developer, reducing onboarding from 4 days to <1 day, and preventing technical debt from slowing delivery. The ROI is actually much higher when you factor in velocity gains."
-
----
+"Plus, the $199/month covers teams up to 20 developers, so your cost per user drops as you scale. If you prefer a per-user model, we have a SaaS alternative at $15-20/user/month."
 
 ### Objection 5: "We'll build it ourselves"
 **Response:**
@@ -389,7 +338,7 @@ Each tool includes `.github/workflows/example.yml` showing:
 ## 📊 Value Proposition Mastery
 
 ### The Core Message
-"Stop wasting 5 hours a week fixing 'it works on my machine.' The DevOps Productivity Suite is your Out-of-the-Box Internal Developer Platform for teams too small to build their own. Save $3,000 per developer per year, reclaim 5+ hours per week, and get new hires productive in <1 day instead of 4. Setup in <1 week, see ROI immediately."
+"Stop wasting 5 hours a week fixing 'it works on my machine.' The DevOps Productivity Suite is the instant platform for your 10-person team—giving you Google-grade project scaffolding, bulletproof cross-platform scripting, and visible debt tracking for less than the cost of a lunch per developer. Setup in <1 week, see ROI immediately."
 
 ### The Problem
 - 58% of developers waste 5+ hours/week on "works on my machine" issues
@@ -416,10 +365,10 @@ Each tool includes `.github/workflows/example.yml` showing:
 ### The ROI
 **For a 5-person team:**
 - Productivity saved: $3,000/developer/year = $15,000/year (eliminates "works on my machine" costs)
-- Time saved: 5+ hours/week per developer = 25+ hours/week = 1,300+ hours/year = $130,000+/year (at $100/hour)
-- Cost: $3,385/year ($997 setup + $199/month × 12)
-- **ROI: 443% (productivity) or 3,840% (time)**
-- **Payback Period: 3 months**
+- Time saved: 25 hours/week = 1,300 hours/year = $130,000/year (at $100/hour)
+- Cost: $3,385/year ($997 setup + $199/month × 12) for teams up to 20 devs
+- **ROI: 443% (productivity) or 3,840% (time savings)**
+- **Payback period: 3 months**
 
 ---
 
@@ -438,7 +387,6 @@ Each tool includes `.github/workflows/example.yml` showing:
 - Git Workflows: Show branching and PR template
 - Ubiquitous Automation: Show CI/CD pipeline
 - Software Entropy: Run scan, show results
-- Infrastructure as Code: Show Terraform plan and apply
 
 **3. Integration (3 min)**
 - How tools work together
@@ -451,7 +399,7 @@ Each tool includes `.github/workflows/example.yml` showing:
 ### Demo Script
 
 **Opening:**
-"Stop wasting 5 hours a week fixing 'it works on my machine.' Let me show you how these 6 tools work together to form an Out-of-the-Box Internal Developer Platform for teams too small to build their own. This eliminates the $3,000 per developer per year cost of 'works on my machine' issues."
+"Let me show you how these 5 tools work together to form an Out-of-the-Box Internal Developer Platform for teams too small to build their own. This eliminates the $3,000 per developer per year cost of 'works on my machine' issues."
 
 **Tool 1 - Shell Games:**
 "First, Shell Games. Instead of manually creating project structure, running setup commands, and checking dependencies, one script does it all. Watch - [execute script]. Project created in 10 seconds, with all dependencies verified. This eliminates the $3k/dev/year cost of environment inconsistencies."
@@ -466,10 +414,7 @@ Each tool includes `.github/workflows/example.yml` showing:
 "Ubiquitous Automation runs tests, linting, and builds automatically. [Show GitHub Actions]. Every push is validated. Broken code never reaches production."
 
 **Tool 5 - Software Entropy:**
-"Software Entropy monitors code quality. [Run scan]. See these issues? They're technical debt. Now you can prioritize fixes."
-
-**Tool 6 - Infrastructure as Code:**
-"Finally, Infrastructure as Code eliminates 'ClickOps' and ensures infrastructure consistency. [Show Terraform plan]. Every infrastructure change is version-controlled, reviewed, and applied consistently. Staging matches production exactly."
+"Finally, Software Entropy monitors code quality. [Run scan]. See these issues? They're technical debt. Now you can prioritize fixes."
 
 **Integration (Unified Patterns):**
 - All tools accessible via npm scripts (`npm run check-env`, `npm run quality:check`, etc.)
@@ -478,7 +423,7 @@ Each tool includes `.github/workflows/example.yml` showing:
 - Standardized error handling across all tools
 
 **Integration:**
-"Together, these 6 tools form a complete workflow—an Out-of-the-Box IDP for teams too small to build their own. New project? Shell Games sets it up in 10 seconds. Need code? Code Generator creates it. Making changes? Git Workflows manages it. Deploying? Ubiquitous Automation handles it with 30% higher frequency. Quality? Software Entropy monitors it and makes debt visible. Infrastructure? Infrastructure as Code provisions it consistently. New hire? Productive in <1 day instead of 4 days—78% faster onboarding."
+"Together, these tools form a complete workflow—an Out-of-the-Box IDP for teams too small to build their own. New project? Shell Games sets it up in 10 seconds. Need code? Code Generator creates it. Making changes? Git Workflows manages it. Deploying? Ubiquitous Automation handles it with 30% higher frequency. Quality? Software Entropy monitors it and makes debt visible. New hire? Productive in <1 day instead of 4 days—78% faster onboarding."
 
 **Closing:**
 "Setup takes <1 week. After that, your team saves $3,000 per developer per year and reclaims 5+ hours per week. ROI in the first month, payback in 3 months. Ready to get started?"
@@ -548,7 +493,7 @@ Before you're ready to sell, you should be able to:
 - [ ] Explain each tool in 30 seconds without notes
 - [ ] Calculate ROI for any team size instantly
 - [ ] Handle the 5 most common objections confidently
-- [ ] Demo all 6 tools without looking at documentation
+- [ ] Demo all 5 tools without looking at documentation
 - [ ] Explain how tools integrate together
 - [ ] Answer technical questions about implementation
 - [ ] Customize the pitch for different team sizes
@@ -574,17 +519,3 @@ Before you're ready to sell, you should be able to:
 ---
 
 **Questions? Review this document weekly. Mastery is a journey, not a destination.**
-
-
-
-
-
-
-
-
-
-
-
-
-
-

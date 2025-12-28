@@ -8,7 +8,10 @@
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "generate:checklist": "node scripts/generate-pdf-checklist.js"
+    "generate:checklist": "node scripts/generate-pdf-checklist.js",
+    "generate:roadmap": "node scripts/generate-roadmap.js",
+    "generate:battle-cards": "node scripts/generate-battle-cards.js",
+    "generate:scenarios": "node scripts/generate-scenarios.js"
   },
   "keywords": [
     "devops",
