@@ -169,7 +169,7 @@
 
 **What it is:**
 - CI/CD automation system
-- Multi-layer testing strategy
+- Multi-layer testing strategy (unit, integration, accessibility)
 - GitHub Actions workflows
 - Local automation scripts
 
@@ -200,8 +200,9 @@
 1. Runs unit tests
 2. Runs integration tests
 3. Runs linting
-4. Runs type checking
-5. Reports results
+4. Runs accessibility tests (WCAG 2.1 AA)
+5. Runs type checking
+6. Reports results
 
 **Technical details:**
 - Uses `npm test` or custom test command
@@ -603,7 +604,7 @@ Each tool includes `.github/workflows/example.yml` with:
 4. **Git Workflows:** `npm run git:pr` creates branch and prepares PR
 5. **Ubiquitous Automation:** Pre-commit hooks run automatically
 6. **Git Workflows:** `npm run git:pr` runs all checks before PR
-7. **Ubiquitous Automation:** CI runs full test suite (from `.github/workflows/example.yml`)
+7. **Ubiquitous Automation:** CI runs full test suite including accessibility checks (from `.github/workflows/ci.yml`)
 8. **Software Entropy:** `npm run quality:check:ci` checks code quality in CI
 9. **Git Workflows:** Merge to main after approval
 10. **Ubiquitous Automation:** CD deploys to production

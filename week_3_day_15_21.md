@@ -71,8 +71,9 @@
 - [ ] Can answer: "What if we use GitLab/Jenkins instead of GitHub Actions?"
 
 **Key Talking Points:**
-- "Every push automatically runs tests, linting, and builds - catches errors before they reach production"
+- "Every push automatically runs tests, linting, accessibility checks, and builds - catches errors before they reach production"
 - "Pre-commit hooks catch issues before you even commit - saves time"
+- "Accessibility testing ensures WCAG 2.1 AA compliance automatically"
 - "Fail-fast means problems stop the pipeline immediately - no broken code in production"
 - "We adapt this to your CI/CD platform - GitHub Actions, GitLab CI, Jenkins, CircleCI, whatever you use"
 

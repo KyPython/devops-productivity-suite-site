@@ -60,6 +60,7 @@
 - Full CI/CD pipeline automation
 - Automated test execution (local, pre-commit, CI)
 - Code quality checks (linting, formatting)
+- Accessibility testing (WCAG 2.1 AA compliance)
 - Build automation (compilation, artifact generation)
 - GitHub Actions workflows (runs on every push/PR)
 - Single-command execution for complex workflows
@@ -67,14 +68,16 @@
 **Value:**
 - 30% higher deployment frequency
 - 40% lower change failure rate
-- Tests, linting, and builds run automatically on every push
+- Tests, linting, accessibility checks, and builds run automatically on every push
 - Eliminates human error in repetitive tasks
 - Fast feedback on code quality
+- Ensures WCAG 2.1 AA accessibility compliance
 
 **Setup includes:**
 - Custom GitHub Actions workflows for your repos
 - Pre-commit hooks configuration
 - Local automation scripts
+- Accessibility testing integration (pa11y, axe-core)
 - Team training on CI/CD best practices
 
 ---
@@ -288,7 +291,11 @@ All tools are accessible via simple npm commands. Add these to your `package.jso
     "test:all": "./scripts/test-all.sh",
     "lint:test": "./scripts/lint-and-test.sh",
     "gen:route": "./scripts/code-generator.sh route",
-    "quality:check": "./scripts/code-quality-check.sh",
+    "quality:check": "software-entropy .",
+    "quality:check:incremental": "software-entropy . --incremental",
+    "quality:check:ci": "software-entropy . --ci",
+    "quality:baseline": "software-entropy . --save-baseline .code-quality-baseline.json",
+    "quality:compare": "software-entropy . --baseline .code-quality-baseline.json",
     "git:status": "./scripts/git-workflow-helper.sh status",
     "git:pr": "./scripts/git-workflow-helper.sh pr",
     "infra:init": "terraform init",

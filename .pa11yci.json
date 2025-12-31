@@ -1,0 +1,26 @@
+{
+  "defaults": {
+    "timeout": 30000,
+    "wait": 2000,
+    "standard": "WCAG2AA",
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"]
+    },
+    "reporter": "cli"
+  },
+  "urls": [
+    {
+      "url": "http://localhost:3000/",
+      "name": "Landing Page"
+    },
+    {
+      "url": "http://localhost:3000/checklist.html",
+      "name": "Checklist Page"
+    },
+    {
+      "url": "http://localhost:3000/presentation.html",
+      "name": "Presentation Page"
+    }
+  ]
+}
+

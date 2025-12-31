@@ -6,6 +6,10 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
+    "test:a11y": "pa11y-ci --config .pa11yci.json",
+    "test:a11y:local": "ts-node scripts/test-accessibility.ts",
+    "test:a11y:axe": "axe http://localhost:3000 --exit",
+    "serve": "serve public -l 3000",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "generate:checklist": "node scripts/generate-pdf-checklist.js",
@@ -22,6 +26,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@axe-core/cli": "^4.8.3",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.24",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
@@ -30,7 +35,10 @@
     "eslint": "^8.57.0",
     "jest": "^29.7.0",
     "markdown-pdf": "^11.0.0",
+    "pa11y": "^7.0.0",
+    "pa11y-ci": "^3.0.1",
     "puppeteer": "^24.32.1",
+    "serve": "^14.2.1",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"

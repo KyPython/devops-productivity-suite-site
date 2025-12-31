@@ -1,15 +1,17 @@
-# Self-Education & Preparedness - Start Here
+# Self-Education Materials - Navigation
 
-**Goal:** Become an expert who can speak with confidence about the DevOps Productivity Suite.
+**Purpose:** Learn the DevOps Productivity Suite (2-3 week study plan)
 
-**Timeline:** 2-3 weeks of focused study
+**When to Use:** When you need to learn about the product, tools, or prepare for sales
 
 ---
 
-## 📚 Study Materials Overview
+## 📚 Files in This Directory
 
-### 1. **MASTERY_ROADMAP.md** ⭐ START HERE
-Your complete study plan with:
+### **MASTERY_ROADMAP.md** ⭐ START HERE
+**Purpose:** Complete 3-week study plan for mastering the product
+
+**Contains:**
 - Week-by-week learning schedule
 - Mastery checklist for each tool
 - Common questions & answers
@@ -18,47 +20,54 @@ Your complete study plan with:
 - Demo preparation
 - Practice exercises
 
-**Time:** 2-3 weeks
-**Priority:** HIGH - This is your main study guide
+**When to Use:**
+- Starting your learning journey
+- Following the structured study plan
+- Preparing for sales/demos
+- Reviewing mastery checklists
+
+**Time:** 2-3 weeks to complete
 
 ---
 
-### 2. **TOOL_DEEP_DIVES.md**
-Deep technical understanding:
+### **QUICK_REFERENCE.md**
+**Purpose:** One-page quick lookup for key information
+
+**Contains:**
+- 30-second tool explanations
+- Quick commands (NPM scripts)
+- ROI calculator
+- Common objections & responses
+- Value proposition (30 seconds)
+- Demo flow (quick version)
+
+**When to Use:**
+- During calls (quick reminders)
+- Before demos (last-minute review)
+- When you forget a talking point
+- Quick ROI calculations
+
+**Time:** Reference as needed
+
+---
+
+### **TOOL_DEEP_DIVES.md**
+**Purpose:** Deep technical understanding of each tool
+
+**Contains:**
 - Technical architecture of each tool
 - How each tool works internally
 - Advanced topics and customization
 - Integration patterns
 - Troubleshooting guide
 
+**When to Use:**
+- When you need technical details
+- Answering technical questions
+- Understanding how tools work internally
+- Troubleshooting issues
+
 **Time:** 1 week (alongside Mastery Roadmap)
-**Priority:** HIGH - Technical confidence
-
----
-
-### 3. **MARKETING_STRATEGY/COMPLETE_MARKETING_PLAN.md**
-Complete marketing strategy:
-- Apollo.io cold outreach strategy
-- LinkedIn content strategy
-- Twitter content strategy
-- Email sequences
-- Conversion funnel
-- Metrics tracking
-
-**Time:** 1-2 days to read, ongoing execution
-**Priority:** MEDIUM - Marketing execution
-
----
-
-### 4. **MARKETING_STRATEGY/EMAIL_SEQUENCES.md**
-Pre-written email sequences:
-- 3 email sequences for different personas
-- LinkedIn task templates
-- Best practices
-- A/B testing ideas
-
-**Time:** 1 day to review, use as templates
-**Priority:** MEDIUM - Sales execution
 
 ---
 

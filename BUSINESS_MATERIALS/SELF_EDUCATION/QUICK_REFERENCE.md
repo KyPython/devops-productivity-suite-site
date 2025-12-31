@@ -10,7 +10,7 @@
 "Eliminates $3,000/dev/year 'works on my machine' costs. POSIX shell scripts that work everywhere—macOS, Linux, Windows WSL. 78% faster onboarding (4 days → <1 day). Use `npm run check-env` to verify your environment."
 
 ### 2. Ubiquitous Automation
-"Full CI/CD pipeline automation. 30% higher deployment frequency, 40% lower change failure rate. Tests, linting, and builds run automatically on every push. Prevents broken code from reaching production. Use `npm run test:all` to run all tests."
+"Full CI/CD pipeline automation. 30% higher deployment frequency, 40% lower change failure rate. Tests, linting, accessibility checks, and builds run automatically on every push. Prevents broken code from reaching production. Ensures WCAG 2.1 AA compliance. Use `npm run test:all` to run all tests, `npm run test:a11y` for accessibility checks."
 
 ### 3. Git Workflows Sample
 "Standardize your branching strategy and PR process. Reduce merge conflicts and speed up code reviews. PR templates and code review processes. Ensures consistent collaboration across your team. Use `npm run git:pr` to prepare for pull requests."

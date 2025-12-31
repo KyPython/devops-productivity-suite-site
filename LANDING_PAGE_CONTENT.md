@@ -28,7 +28,7 @@ That's $3,000 per developer per year in lost productivity. Teams of 5-10 develop
 Eliminates $3,000/dev/year "works on my machine" costs. POSIX shell scripts that work everywhere—macOS, Linux, Windows WSL. 78% faster onboarding (4 days → <1 day).
 
 ### 2. Ubiquitous Automation
-Full CI/CD pipeline automation. 30% higher deployment frequency, 40% lower change failure rate. Tests, linting, and builds run automatically on every push.
+Full CI/CD pipeline automation. 30% higher deployment frequency, 40% lower change failure rate. Tests, linting, accessibility checks, and builds run automatically on every push.
 
 ### 3. Git Workflows Sample
 Standardize your branching strategy and PR process. Reduce merge conflicts and speed up code reviews.
